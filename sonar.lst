@@ -1,0 +1,269 @@
+   1               		.file	"sonar.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	init_sonar
+  18               	init_sonar:
+  19               	.LFB8:
+  20               	.LM1:
+  21               	/* prologue: function */
+  22               	/* frame size = 0 */
+  23               	.LM2:
+  24 0000 BB9A      		sbi 55-32,3
+  25               	.LM3:
+  26 0002 BC98      		cbi 55-32,4
+  27               	/* epilogue start */
+  28               	.LM4:
+  29 0004 0895      		ret
+  30               	.LFE8:
+  32               	.global	trigger_sonar
+  34               	trigger_sonar:
+  35               	.LFB9:
+  36               	.LM5:
+  37               	/* prologue: function */
+  38               	/* frame size = 0 */
+  39               	.LM6:
+  40 0006 C398      		cbi 56-32,3
+  41               	.LBB44:
+  42               	.LBB45:
+  43               	.LBB46:
+  44               	.LBB47:
+  45               	.LM7:
+  46 0008 85E0      		ldi r24,lo8(5)
+  47 000a 982F      		mov r25,r24
+  48               	.LVL0:
+  49               	/* #APP */
+  50               	 ;  83 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  51 000c 9A95      		1: dec r25
+  52 000e 01F4      		brne 1b
+  53               	 ;  0 "" 2
+  54               	/* #NOAPP */
+  55               	.LBE47:
+  56               	.LBE46:
+  57               	.LBE45:
+  58               	.LBE44:
+  59               	.LM8:
+  60 0010 C39A      		sbi 56-32,3
+  61               	.LBB48:
+  62               	.LBB49:
+  63               	.LBB50:
+  64               	.LBB51:
+  65               	.LM9:
+  66 0012 90E4      		ldi r25,lo8(64)
+  67               	.LVL1:
+  68               	/* #APP */
+  69               	 ;  83 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  70 0014 9A95      		1: dec r25
+  71 0016 01F4      		brne 1b
+  72               	 ;  0 "" 2
+  73               	/* #NOAPP */
+  74               	.LBE51:
+  75               	.LBE50:
+  76               	.LBE49:
+  77               	.LBE48:
+  78               	.LM10:
+  79 0018 C398      		cbi 56-32,3
+  80               	.LBB52:
+  81               	.LBB53:
+  82               	.LBB54:
+  83               	.LBB55:
+  84               	.LM11:
+  85               	/* #APP */
+  86               	 ;  83 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  87 001a 8A95      		1: dec r24
+  88 001c 01F4      		brne 1b
+  89               	 ;  0 "" 2
+  90               	.LVL2:
+  91               	/* epilogue start */
+  92               	/* #NOAPP */
+  93               	.LBE55:
+  94               	.LBE54:
+  95               	.LBE53:
+  96               	.LBE52:
+  97               	.LM12:
+  98 001e 0895      		ret
+  99               	.LFE9:
+ 101               	.global	read_sonar
+ 103               	read_sonar:
+ 104               	.LFB10:
+ 105               	.LM13:
+ 106               	/* prologue: function */
+ 107               	/* frame size = 0 */
+ 108               	.LM14:
+ 109 0020 0E94 0000 		call trigger_sonar
+ 110 0024 80E0      		ldi r24,lo8(0)
+ 111 0026 90E0      		ldi r25,hi8(0)
+ 112 0028 A0E0      		ldi r26,hlo8(0)
+ 113 002a B0E0      		ldi r27,hhi8(0)
+ 114               	.LVL3:
+ 115               	.L7:
+ 116               	.LM15:
+ 117 002c B499      		sbic 54-32,4
+ 118 002e 00C0      		rjmp .L6
+ 119               	.LM16:
+ 120 0030 0196      		adiw r24,1
+ 121 0032 A11D      		adc r26,__zero_reg__
+ 122 0034 B11D      		adc r27,__zero_reg__
+ 123 0036 803C      		cpi r24,lo8(600000)
+ 124 0038 27E2      		ldi r18,hi8(600000)
+ 125 003a 9207      		cpc r25,r18
+ 126 003c 29E0      		ldi r18,hlo8(600000)
+ 127 003e A207      		cpc r26,r18
+ 128 0040 20E0      		ldi r18,hhi8(600000)
+ 129 0042 B207      		cpc r27,r18
+ 130 0044 01F4      		brne .L7
+ 131 0046 20E0      		ldi r18,lo8(0)
+ 132 0048 30E0      		ldi r19,hi8(0)
+ 133 004a 40E0      		ldi r20,hlo8(0)
+ 134 004c 50E0      		ldi r21,hhi8(0)
+ 135 004e 00C0      		rjmp .L8
+ 136               	.L6:
+ 137               	.LM17:
+ 138 0050 1FBC      		out 79-32,__zero_reg__
+ 139               	.LM18:
+ 140 0052 8EB5      		in r24,78-32
+ 141               	.LVL4:
+ 142 0054 8260      		ori r24,lo8(2)
+ 143 0056 8EBD      		out 78-32,r24
+ 144               	.LM19:
+ 145 0058 1DBC      		out (76)+1-32,__zero_reg__
+ 146 005a 1CBC      		out 76-32,__zero_reg__
+ 147 005c 20E0      		ldi r18,lo8(0)
+ 148 005e 30E0      		ldi r19,hi8(0)
+ 149 0060 40E0      		ldi r20,hlo8(0)
+ 150 0062 50E0      		ldi r21,hhi8(0)
+ 151               	.LVL5:
+ 152               	.L10:
+ 153               	.LM20:
+ 154 0064 B49B      		sbis 54-32,4
+ 155 0066 00C0      		rjmp .L9
+ 156               	.LM21:
+ 157 0068 8CB5      		in r24,76-32
+ 158 006a 9DB5      		in r25,(76)+1-32
+ 159 006c 8156      		subi r24,lo8(-5535)
+ 160 006e 9A4E      		sbci r25,hi8(-5535)
+ 161 0070 00F4      		brsh .L9
+ 162               	.LM22:
+ 163 0072 2F5F      		subi r18,lo8(-(1))
+ 164 0074 3F4F      		sbci r19,hi8(-(1))
+ 165 0076 4F4F      		sbci r20,hlo8(-(1))
+ 166 0078 5F4F      		sbci r21,hhi8(-(1))
+ 167 007a 203C      		cpi r18,lo8(600000)
+ 168 007c 87E2      		ldi r24,hi8(600000)
+ 169 007e 3807      		cpc r19,r24
+ 170 0080 89E0      		ldi r24,hlo8(600000)
+ 171 0082 4807      		cpc r20,r24
+ 172 0084 80E0      		ldi r24,hhi8(600000)
+ 173 0086 5807      		cpc r21,r24
+ 174 0088 01F4      		brne .L10
+ 175 008a 21E0      		ldi r18,lo8(1)
+ 176 008c 30E0      		ldi r19,hi8(1)
+ 177 008e 40E0      		ldi r20,hlo8(1)
+ 178 0090 50E0      		ldi r21,hhi8(1)
+ 179               	.LVL6:
+ 180 0092 00C0      		rjmp .L8
+ 181               	.LVL7:
+ 182               	.L9:
+ 183               	.LM23:
+ 184 0094 8CB5      		in r24,76-32
+ 185 0096 9DB5      		in r25,(76)+1-32
+ 186               	.LM24:
+ 187 0098 1EBC      		out 78-32,__zero_reg__
+ 188               	.LM25:
+ 189 009a 8156      		subi r24,lo8(-5535)
+ 190 009c 9A4E      		sbci r25,hi8(-5535)
+ 191 009e 00F0      		brlo .L11
+ 192 00a0 22E0      		ldi r18,lo8(2)
+ 193 00a2 30E0      		ldi r19,hi8(2)
+ 194 00a4 40E0      		ldi r20,hlo8(2)
+ 195 00a6 50E0      		ldi r21,hhi8(2)
+ 196               	.LVL8:
+ 197 00a8 00C0      		rjmp .L8
+ 198               	.LVL9:
+ 199               	.L11:
+ 200               	.LM26:
+ 201 00aa CA01      		movw r24,r20
+ 202 00ac B901      		movw r22,r18
+ 203 00ae 0E94 0000 		call __floatunsisf
+ 204               	.LVL10:
+ 205 00b2 20E0      		ldi r18,lo8(0x42680000)
+ 206 00b4 30E0      		ldi r19,hi8(0x42680000)
+ 207 00b6 48E6      		ldi r20,hlo8(0x42680000)
+ 208 00b8 52E4      		ldi r21,hhi8(0x42680000)
+ 209 00ba 0E94 0000 		call __divsf3
+ 210 00be 0E94 0000 		call __fixunssfsi
+ 211 00c2 9B01      		movw r18,r22
+ 212 00c4 AC01      		movw r20,r24
+ 213               	.LVL11:
+ 214               	.L8:
+ 215               	.LM27:
+ 216 00c6 B901      		movw r22,r18
+ 217 00c8 CA01      		movw r24,r20
+ 218               	.LVL12:
+ 219               	/* epilogue start */
+ 220 00ca 0895      		ret
+ 221               	.LFE10:
+ 223               	.global	overFlowCounter
+ 224               	.global	overFlowCounter
+ 225               		.section .bss
+ 228               	overFlowCounter:
+ 229 0000 0000 0000 		.skip 4,0
+ 230               	.global	trig_counter
+ 231               	.global	trig_counter
+ 234               	trig_counter:
+ 235 0004 0000 0000 		.skip 4,0
+ 236               	.global	no_of_ticks
+ 237               	.global	no_of_ticks
+ 240               	no_of_ticks:
+ 241 0008 0000 0000 		.skip 4,0
+ 242               		.comm uint_global_prad_M1,2,1
+ 243               		.comm uint_global_prad_M2,2,1
+ 244               		.comm uint_global_prad_M3,2,1
+ 245               		.comm uint_global_prad_M4,2,1
+ 246               		.comm uart_echo,1,1
+ 247               		.comm UART0_TxHead,1,1
+ 248               		.comm UART0_TxTail,1,1
+ 249               		.comm UART0_RxHead,1,1
+ 250               		.comm UART0_RxTail,1,1
+ 251               		.comm UART1_TxHead,1,1
+ 252               		.comm UART1_TxTail,1,1
+ 253               		.comm UART1_RxHead,1,1
+ 254               		.comm UART1_RxTail,1,1
+ 295               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 sonar.c
+C:\Users\magku\AppData\Local\Temp/ccXqmZaA.s:2      *ABS*:0000003f __SREG__
+C:\Users\magku\AppData\Local\Temp/ccXqmZaA.s:3      *ABS*:0000003e __SP_H__
+C:\Users\magku\AppData\Local\Temp/ccXqmZaA.s:4      *ABS*:0000003d __SP_L__
+C:\Users\magku\AppData\Local\Temp/ccXqmZaA.s:5      *ABS*:00000034 __CCP__
+C:\Users\magku\AppData\Local\Temp/ccXqmZaA.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\magku\AppData\Local\Temp/ccXqmZaA.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\magku\AppData\Local\Temp/ccXqmZaA.s:18     .text:00000000 init_sonar
+C:\Users\magku\AppData\Local\Temp/ccXqmZaA.s:34     .text:00000006 trigger_sonar
+C:\Users\magku\AppData\Local\Temp/ccXqmZaA.s:103    .text:00000020 read_sonar
+C:\Users\magku\AppData\Local\Temp/ccXqmZaA.s:228    .bss:00000000 overFlowCounter
+C:\Users\magku\AppData\Local\Temp/ccXqmZaA.s:234    .bss:00000004 trig_counter
+C:\Users\magku\AppData\Local\Temp/ccXqmZaA.s:240    .bss:00000008 no_of_ticks
+                            *COM*:00000002 uint_global_prad_M1
+                            *COM*:00000002 uint_global_prad_M2
+                            *COM*:00000002 uint_global_prad_M3
+                            *COM*:00000002 uint_global_prad_M4
+                            *COM*:00000001 uart_echo
+                            *COM*:00000001 UART0_TxHead
+                            *COM*:00000001 UART0_TxTail
+                            *COM*:00000001 UART0_RxHead
+                            *COM*:00000001 UART0_RxTail
+                            *COM*:00000001 UART1_TxHead
+                            *COM*:00000001 UART1_TxTail
+                            *COM*:00000001 UART1_RxHead
+                            *COM*:00000001 UART1_RxTail
+
+UNDEFINED SYMBOLS
+__floatunsisf
+__divsf3
+__fixunssfsi
+__do_clear_bss
