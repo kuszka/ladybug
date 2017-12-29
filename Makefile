@@ -81,7 +81,7 @@ OBJDIR = .
 
 # List C source files here. (C dependencies are automatically generated.)
 # List C source files here. (C dependencies are automatically generated.)
-SRC = Adc.c Main.c Uart.c motor.c timer.c sonar.c
+SRC = Adc.c Main.c Uart.c motor.c timer.c sonar.c network.c
 
 # List C++ source files here. (C dependencies are automatically generated.)
 CPPSRC = 

@@ -40,6 +40,17 @@ WObit 2008
 #define ECHO_PIN    	PINB
 #define ECHO_BIT    	PB4             // Echo Pin
 
+#define TRIGL_DDR    	DDRC           // Trigger Port
+#define TRIGL_PORT   	PORTC
+#define TRIGL_PIN    	PINC
+#define TRIGL_BIT    	PC5             // Trigger Pin
+ 
+#define ECHOL_DDR    	DDRC            // Echo Port
+#define ECHOL_PORT   	PORTC
+#define ECHOL_PIN    	PINC
+#define ECHOL_BIT    	PC6             // Echo Pin
+
+
 #define FS_AB           PC2
 #define FS_AB_DDR       DDRC
 #define FS_AB_PORT      PORTC

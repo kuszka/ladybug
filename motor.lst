@@ -196,16 +196,16 @@
  259               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 motor.c
-C:\Users\magku\AppData\Local\Temp/cc73Hm4c.s:2      *ABS*:0000003f __SREG__
-C:\Users\magku\AppData\Local\Temp/cc73Hm4c.s:3      *ABS*:0000003e __SP_H__
-C:\Users\magku\AppData\Local\Temp/cc73Hm4c.s:4      *ABS*:0000003d __SP_L__
-C:\Users\magku\AppData\Local\Temp/cc73Hm4c.s:5      *ABS*:00000034 __CCP__
-C:\Users\magku\AppData\Local\Temp/cc73Hm4c.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\magku\AppData\Local\Temp/cc73Hm4c.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\magku\AppData\Local\Temp/cc73Hm4c.s:18     .text:00000000 MOTOR_init
-C:\Users\magku\AppData\Local\Temp/cc73Hm4c.s:48     .text:00000020 MOTOR_drive
-C:\Users\magku\AppData\Local\Temp/cc73Hm4c.s:156    .text:000000a8 MOTOR_break
-C:\Users\magku\AppData\Local\Temp/cc73Hm4c.s:182    .text:000000be MOTOR_sleep
+C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:2      *ABS*:0000003f __SREG__
+C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:3      *ABS*:0000003e __SP_H__
+C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:4      *ABS*:0000003d __SP_L__
+C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:5      *ABS*:00000034 __CCP__
+C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:18     .text:00000000 MOTOR_init
+C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:48     .text:00000020 MOTOR_drive
+C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:156    .text:000000a8 MOTOR_break
+C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:182    .text:000000be MOTOR_sleep
                             *COM*:00000002 uint_global_prad_M1
                             *COM*:00000002 uint_global_prad_M2
                             *COM*:00000002 uint_global_prad_M3

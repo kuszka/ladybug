@@ -32,7 +32,7 @@
   40               	/* prologue: Signal */
   41               	/* frame size = 0 */
   42               	.LM2:
-  43 0026 8091 0000 		lds r24,ADC_channel.1690
+  43 0026 8091 0000 		lds r24,ADC_channel.1716
   44 002a 8230      		cpi r24,lo8(2)
   45 002c 01F4      		brne .+2
   46 002e 00C0      		rjmp .L4
@@ -54,16 +54,16 @@
   62               	.LM3:
   63 004a 24B1      		in r18,36-32
   64 004c 35B1      		in r19,(36)+1-32
-  65 004e 8091 0000 		lds r24,pomiar.1689
-  66 0052 9091 0000 		lds r25,(pomiar.1689)+1
+  65 004e 8091 0000 		lds r24,pomiar.1715
+  66 0052 9091 0000 		lds r25,(pomiar.1715)+1
   67 0056 280F      		add r18,r24
   68 0058 391F      		adc r19,r25
-  69 005a 3093 0000 		sts (pomiar.1689)+1,r19
-  70 005e 2093 0000 		sts pomiar.1689,r18
+  69 005a 3093 0000 		sts (pomiar.1715)+1,r19
+  70 005e 2093 0000 		sts pomiar.1715,r18
   71               	.LM4:
-  72 0062 8091 0000 		lds r24,ile_pomiarow.1691
+  72 0062 8091 0000 		lds r24,ile_pomiarow.1717
   73 0066 8150      		subi r24,lo8(-(-1))
-  74 0068 8093 0000 		sts ile_pomiarow.1691,r24
+  74 0068 8093 0000 		sts ile_pomiarow.1717,r24
   75 006c 8823      		tst r24
   76 006e 01F0      		breq .+2
   77 0070 00C0      		rjmp .L8
@@ -75,10 +75,10 @@
   83               	.LBE26:
   84               	.LM6:
   85 0074 82E0      		ldi r24,lo8(2)
-  86 0076 8093 0000 		sts ADC_channel.1690,r24
+  86 0076 8093 0000 		sts ADC_channel.1716,r24
   87               	.LM7:
   88 007a 80E1      		ldi r24,lo8(16)
-  89 007c 8093 0000 		sts ile_pomiarow.1691,r24
+  89 007c 8093 0000 		sts ile_pomiarow.1717,r24
   90               	.LM8:
   91 0080 8DE4      		ldi r24,lo8(77)
   92 0082 87B9      		out 39-32,r24
@@ -107,16 +107,16 @@
  115               	.LM10:
  116 00b6 24B1      		in r18,36-32
  117 00b8 35B1      		in r19,(36)+1-32
- 118 00ba 8091 0000 		lds r24,pomiar.1689
- 119 00be 9091 0000 		lds r25,(pomiar.1689)+1
+ 118 00ba 8091 0000 		lds r24,pomiar.1715
+ 119 00be 9091 0000 		lds r25,(pomiar.1715)+1
  120 00c2 280F      		add r18,r24
  121 00c4 391F      		adc r19,r25
- 122 00c6 3093 0000 		sts (pomiar.1689)+1,r19
- 123 00ca 2093 0000 		sts pomiar.1689,r18
+ 122 00c6 3093 0000 		sts (pomiar.1715)+1,r19
+ 123 00ca 2093 0000 		sts pomiar.1715,r18
  124               	.LM11:
- 125 00ce 8091 0000 		lds r24,ile_pomiarow.1691
+ 125 00ce 8091 0000 		lds r24,ile_pomiarow.1717
  126 00d2 8150      		subi r24,lo8(-(-1))
- 127 00d4 8093 0000 		sts ile_pomiarow.1691,r24
+ 127 00d4 8093 0000 		sts ile_pomiarow.1717,r24
  128 00d8 8823      		tst r24
  129 00da 01F0      		breq .+2
  130 00dc 00C0      		rjmp .L8
@@ -128,10 +128,10 @@
  136               	.LBE28:
  137               	.LM13:
  138 00e0 83E0      		ldi r24,lo8(3)
- 139 00e2 8093 0000 		sts ADC_channel.1690,r24
+ 139 00e2 8093 0000 		sts ADC_channel.1716,r24
  140               	.LM14:
  141 00e6 80E1      		ldi r24,lo8(16)
- 142 00e8 8093 0000 		sts ile_pomiarow.1691,r24
+ 142 00e8 8093 0000 		sts ile_pomiarow.1717,r24
  143               	.LM15:
  144 00ec 84E4      		ldi r24,lo8(68)
  145 00ee 87B9      		out 39-32,r24
@@ -160,16 +160,16 @@
  168               	.LM17:
  169 0122 24B1      		in r18,36-32
  170 0124 35B1      		in r19,(36)+1-32
- 171 0126 8091 0000 		lds r24,pomiar.1689
- 172 012a 9091 0000 		lds r25,(pomiar.1689)+1
+ 171 0126 8091 0000 		lds r24,pomiar.1715
+ 172 012a 9091 0000 		lds r25,(pomiar.1715)+1
  173 012e 280F      		add r18,r24
  174 0130 391F      		adc r19,r25
- 175 0132 3093 0000 		sts (pomiar.1689)+1,r19
- 176 0136 2093 0000 		sts pomiar.1689,r18
+ 175 0132 3093 0000 		sts (pomiar.1715)+1,r19
+ 176 0136 2093 0000 		sts pomiar.1715,r18
  177               	.LM18:
- 178 013a 8091 0000 		lds r24,ile_pomiarow.1691
+ 178 013a 8091 0000 		lds r24,ile_pomiarow.1717
  179 013e 8150      		subi r24,lo8(-(-1))
- 180 0140 8093 0000 		sts ile_pomiarow.1691,r24
+ 180 0140 8093 0000 		sts ile_pomiarow.1717,r24
  181 0144 8823      		tst r24
  182 0146 01F0      		breq .+2
  183 0148 00C0      		rjmp .L8
@@ -181,10 +181,10 @@
  189               	.LBE30:
  190               	.LM20:
  191 014c 84E0      		ldi r24,lo8(4)
- 192 014e 8093 0000 		sts ADC_channel.1690,r24
+ 192 014e 8093 0000 		sts ADC_channel.1716,r24
  193               	.LM21:
  194 0152 80E1      		ldi r24,lo8(16)
- 195 0154 8093 0000 		sts ile_pomiarow.1691,r24
+ 195 0154 8093 0000 		sts ile_pomiarow.1717,r24
  196               	.LM22:
  197 0158 85E4      		ldi r24,lo8(69)
  198 015a 87B9      		out 39-32,r24
@@ -213,16 +213,16 @@
  221               	.LM24:
  222 018e 24B1      		in r18,36-32
  223 0190 35B1      		in r19,(36)+1-32
- 224 0192 8091 0000 		lds r24,pomiar.1689
- 225 0196 9091 0000 		lds r25,(pomiar.1689)+1
+ 224 0192 8091 0000 		lds r24,pomiar.1715
+ 225 0196 9091 0000 		lds r25,(pomiar.1715)+1
  226 019a 280F      		add r18,r24
  227 019c 391F      		adc r19,r25
- 228 019e 3093 0000 		sts (pomiar.1689)+1,r19
- 229 01a2 2093 0000 		sts pomiar.1689,r18
+ 228 019e 3093 0000 		sts (pomiar.1715)+1,r19
+ 229 01a2 2093 0000 		sts pomiar.1715,r18
  230               	.LM25:
- 231 01a6 8091 0000 		lds r24,ile_pomiarow.1691
+ 231 01a6 8091 0000 		lds r24,ile_pomiarow.1717
  232 01aa 8150      		subi r24,lo8(-(-1))
- 233 01ac 8093 0000 		sts ile_pomiarow.1691,r24
+ 233 01ac 8093 0000 		sts ile_pomiarow.1717,r24
  234 01b0 8823      		tst r24
  235 01b2 01F4      		brne .L8
  236               	.LBB32:
@@ -233,10 +233,10 @@
  241               	.LBE32:
  242               	.LM27:
  243 01b6 81E0      		ldi r24,lo8(1)
- 244 01b8 8093 0000 		sts ADC_channel.1690,r24
+ 244 01b8 8093 0000 		sts ADC_channel.1716,r24
  245               	.LM28:
  246 01bc 80E1      		ldi r24,lo8(16)
- 247 01be 8093 0000 		sts ile_pomiarow.1691,r24
+ 247 01be 8093 0000 		sts ile_pomiarow.1717,r24
  248               	.LM29:
  249 01c2 89E4      		ldi r24,lo8(73)
  250 01c4 87B9      		out 39-32,r24
@@ -262,8 +262,8 @@
  270 01f2 6093 0000 		sts uint_global_prad_M4,r22
  271               	.L9:
  272               	.LM31:
- 273 01f6 1092 0000 		sts (pomiar.1689)+1,__zero_reg__
- 274 01fa 1092 0000 		sts pomiar.1689,__zero_reg__
+ 273 01f6 1092 0000 		sts (pomiar.1715)+1,__zero_reg__
+ 274 01fa 1092 0000 		sts pomiar.1715,__zero_reg__
  275               	.LBB34:
  276               	.LBB35:
  277               	.LM32:
@@ -352,11 +352,11 @@
  368 023c 0895      		ret
  369               	.LFE12:
  371               		.data
- 374               	ile_pomiarow.1691:
+ 374               	ile_pomiarow.1717:
  375 0000 10        		.byte	16
- 378               	ADC_channel.1690:
+ 378               	ADC_channel.1716:
  379 0001 01        		.byte	1
- 380               		.lcomm pomiar.1689,2
+ 380               		.lcomm pomiar.1715,2
  381               		.comm uint_global_prad_M1,2,1
  382               		.comm uint_global_prad_M2,2,1
  383               		.comm uint_global_prad_M3,2,1
@@ -373,24 +373,24 @@
  450               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 Adc.c
-C:\Users\magku\AppData\Local\Temp/cceOD4Ti.s:2      *ABS*:0000003f __SREG__
-C:\Users\magku\AppData\Local\Temp/cceOD4Ti.s:3      *ABS*:0000003e __SP_H__
-C:\Users\magku\AppData\Local\Temp/cceOD4Ti.s:4      *ABS*:0000003d __SP_L__
-C:\Users\magku\AppData\Local\Temp/cceOD4Ti.s:5      *ABS*:00000034 __CCP__
-C:\Users\magku\AppData\Local\Temp/cceOD4Ti.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\magku\AppData\Local\Temp/cceOD4Ti.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\magku\AppData\Local\Temp/cceOD4Ti.s:18     .text:00000000 __vector_21
-C:\Users\magku\AppData\Local\Temp/cceOD4Ti.s:378    .data:00000001 ADC_channel.1690
-                             .bss:00000000 pomiar.1689
-C:\Users\magku\AppData\Local\Temp/cceOD4Ti.s:374    .data:00000000 ile_pomiarow.1691
+C:\Users\magku\AppData\Local\Temp/ccimucSe.s:2      *ABS*:0000003f __SREG__
+C:\Users\magku\AppData\Local\Temp/ccimucSe.s:3      *ABS*:0000003e __SP_H__
+C:\Users\magku\AppData\Local\Temp/ccimucSe.s:4      *ABS*:0000003d __SP_L__
+C:\Users\magku\AppData\Local\Temp/ccimucSe.s:5      *ABS*:00000034 __CCP__
+C:\Users\magku\AppData\Local\Temp/ccimucSe.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\magku\AppData\Local\Temp/ccimucSe.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\magku\AppData\Local\Temp/ccimucSe.s:18     .text:00000000 __vector_21
+C:\Users\magku\AppData\Local\Temp/ccimucSe.s:378    .data:00000001 ADC_channel.1716
+                             .bss:00000000 pomiar.1715
+C:\Users\magku\AppData\Local\Temp/ccimucSe.s:374    .data:00000000 ile_pomiarow.1717
                             *COM*:00000002 uint_global_prad_M1
                             *COM*:00000002 uint_global_prad_M2
                             *COM*:00000002 uint_global_prad_M3
                             *COM*:00000002 uint_global_prad_M4
-C:\Users\magku\AppData\Local\Temp/cceOD4Ti.s:313    .text:00000228 ADC_init
-C:\Users\magku\AppData\Local\Temp/cceOD4Ti.s:331    .text:00000232 ADC_start_conversion
-C:\Users\magku\AppData\Local\Temp/cceOD4Ti.s:345    .text:00000236 ADC_turn_off
-C:\Users\magku\AppData\Local\Temp/cceOD4Ti.s:359    .text:0000023a ADC_turn_on
+C:\Users\magku\AppData\Local\Temp/ccimucSe.s:313    .text:00000228 ADC_init
+C:\Users\magku\AppData\Local\Temp/ccimucSe.s:331    .text:00000232 ADC_start_conversion
+C:\Users\magku\AppData\Local\Temp/ccimucSe.s:345    .text:00000236 ADC_turn_off
+C:\Users\magku\AppData\Local\Temp/ccimucSe.s:359    .text:0000023a ADC_turn_on
                             *COM*:00000001 uart_echo
                             *COM*:00000001 UART0_TxHead
                             *COM*:00000001 UART0_TxTail

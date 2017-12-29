@@ -38,6 +38,9 @@ void ioinit(void)
 	
 	LED1_DDR |= (1<<LED1)|(1<<LED2); //jako wyjscia
 	
+	PIR2_DDR &= ~(1<<PIR2);
+	PIR1_DDR &= ~(1<<PIR1);
+	
 	DDRF = 0x00; //caly port jako wejscie (konieczne gdy uzywamy ADC)
 }
 
@@ -53,6 +56,11 @@ int main(void)
 {
     unsigned char rcv;
     char tmp[8];
+	double output[2];
+	uint32_t ultrasonics[2];
+	float ultrasonics_normalized[2];
+	int pir_l;
+	int pir_r;
     int itmp;
 	    
     ioinit();	
@@ -61,12 +69,11 @@ int main(void)
     MOTOR_init();
     ADC_init();
 	init_sonar();
-    
     sei();	//globalne wlaczenie przerwan
+	
+	//uint32_t distance = 0;
     
 	ADC_start_conversion();
-	
-	uint32_t distance=0;
 	
 	UART0_print("UART0 test\r\n");
 	LED2_OFF;
@@ -95,6 +102,51 @@ int main(void)
 					case 'l':
 						MOTOR_drive(0,255);
 						break;
+					case 'n':
+						ultrasonics[0] = 0;
+						ultrasonics[1] = 0;
+						read_sonar(ultrasonics);
+						pir_l = 0;
+						pir_r = 0;
+						char lf[10];
+						char rgt[10];
+						char out[10];
+						char out1[10];
+						
+						if((PINB & (1<<PIR2)))            // check for sensor pin PC.0 using bit
+						{
+							pir_l = 1;
+						}
+						
+						if((PINB & (1<<PIR1)))            // check for sensor pin PC.0 using bit
+						{
+							pir_r = 1;
+						}
+						
+						if(ultrasonics[0] > 100)            // check for sensor pin PC.0 using bit
+						{
+							ultrasonics[0] = 100;
+						}
+						
+						if(ultrasonics[1] > 100)            // check for sensor pin PC.0 using bit
+						{
+							ultrasonics[1] = 100;
+						}
+						ultrasonics_normalized[0]= ultrasonics[0]/100;
+						ultrasonics_normalized[1]= ultrasonics[1]/100;
+						output[0] = 0;
+						output[1] = 0;
+						network(output, ultrasonics_normalized[1], ultrasonics_normalized[0], pir_l, pir_r);
+						dtostrf(output[0], 10, 5, out);
+						dtostrf(output[1], 10, 5, out1);
+						UART0_print(out);
+						UART0_print("\r\n");
+						UART0_print(out1);
+						UART0_print("\r\n");
+						int left = (int)(output[0]*255);
+						int right = (int)(output[1]*255);
+						MOTOR_drive(right,left);
+						break;
 					case 'm':
 						if((PINB & (1<<PIR2)))            // check for sensor pin PC.0 using bit
 							{
@@ -103,12 +155,20 @@ int main(void)
 						break;
 					case 'u':
 						UART0_print("Ultrasonic: ");
-						distance = read_sonar();
+						read_sonar(ultrasonics);
 						char str[16];
-						itoa (distance,str,10);
+						itoa (ultrasonics[0],str,10);
 						UART0_print(str);
 						UART0_print("\r\n");
-						break;								
+						break;		
+					case 'y':
+						UART0_print("Ultrasonic2: ");
+						read_sonar(ultrasonics);
+						char str2[16];
+						itoa (ultrasonics[1],str2,10);
+						UART0_print(str2);
+						UART0_print("\r\n");
+						break;							
 			}
 		}		
 	}

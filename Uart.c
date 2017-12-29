@@ -42,9 +42,9 @@ unsigned char x;
 	//UBRRH=0x01;
 	//UBRRL=0xA0;		//dla 2400@16MHz
 	//UBRRL=207;		//dla 4800@16MHz
-	//UBRRL=103;		//dla 9600@16MHz
+	UBRR0L=103;		//dla 9600@16MHz
 	//UBRRL=51;			//dla 19200@16MHz
-	UBRR0L=16;			//dla 57600@16MHz
+	//UBRR0L=16;			//dla 57600@16MHz
 	//UBRRL=8;			//dla 57600@8MHz
 	//UBRRL=8;			//dla 115200@16MHz
    

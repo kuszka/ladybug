@@ -1,4 +1,5 @@
-Main.o: Main.c Main.h io_cfg.h Adc.h motor.h timer.h sonar.h Uart.h
+Main.o: Main.c Main.h io_cfg.h Adc.h motor.h timer.h sonar.h sonarl.h \
+  Uart.h network.h
 
 Main.h:
 
@@ -12,4 +13,8 @@ timer.h:
 
 sonar.h:
 
+sonarl.h:
+
 Uart.h:
+
+network.h:

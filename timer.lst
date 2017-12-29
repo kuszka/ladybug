@@ -33,11 +33,11 @@
   41 002a 8093 0000 		sts TIMER_wait_time_ms,r24
   42               	.L2:
   43               	.LM4:
-  44 002e 8091 0000 		lds r24,count.1690
-  45 0032 9091 0000 		lds r25,(count.1690)+1
+  44 002e 8091 0000 		lds r24,count.1716
+  45 0032 9091 0000 		lds r25,(count.1716)+1
   46 0036 0196      		adiw r24,1
-  47 0038 9093 0000 		sts (count.1690)+1,r25
-  48 003c 8093 0000 		sts count.1690,r24
+  47 0038 9093 0000 		sts (count.1716)+1,r25
+  48 003c 8093 0000 		sts count.1716,r24
   49 0040 0197      		sbiw r24,1
   50 0042 845F      		subi r24,lo8(500)
   51 0044 9140      		sbci r25,hi8(500)
@@ -47,8 +47,8 @@
   55 004a 8058      		subi r24,lo8(-(-128))
   56 004c 82BB      		out 50-32,r24
   57               	.LM6:
-  58 004e 1092 0000 		sts (count.1690)+1,__zero_reg__
-  59 0052 1092 0000 		sts count.1690,__zero_reg__
+  58 004e 1092 0000 		sts (count.1716)+1,__zero_reg__
+  59 0052 1092 0000 		sts count.1716,__zero_reg__
   60               	.L4:
   61               	/* epilogue start */
   62               	.LM7:
@@ -107,7 +107,7 @@
  120               		.section .bss
  123               	TIMER_wait_time_ms:
  124 0000 0000      		.skip 2,0
- 125               		.lcomm count.1690,2
+ 125               		.lcomm count.1716,2
  126               		.comm uint_global_prad_M1,2,1
  127               		.comm uint_global_prad_M2,2,1
  128               		.comm uint_global_prad_M3,2,1
@@ -124,17 +124,17 @@
  179               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 timer.c
-C:\Users\magku\AppData\Local\Temp/ccdnydOo.s:2      *ABS*:0000003f __SREG__
-C:\Users\magku\AppData\Local\Temp/ccdnydOo.s:3      *ABS*:0000003e __SP_H__
-C:\Users\magku\AppData\Local\Temp/ccdnydOo.s:4      *ABS*:0000003d __SP_L__
-C:\Users\magku\AppData\Local\Temp/ccdnydOo.s:5      *ABS*:00000034 __CCP__
-C:\Users\magku\AppData\Local\Temp/ccdnydOo.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\magku\AppData\Local\Temp/ccdnydOo.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\magku\AppData\Local\Temp/ccdnydOo.s:18     .text:00000000 __vector_15
-C:\Users\magku\AppData\Local\Temp/ccdnydOo.s:123    .bss:00000000 TIMER_wait_time_ms
-                             .bss:00000002 count.1690
-C:\Users\magku\AppData\Local\Temp/ccdnydOo.s:75     .text:00000066 TIMER_init
-C:\Users\magku\AppData\Local\Temp/ccdnydOo.s:97     .text:00000076 TIMER_wait_ms
+C:\Users\magku\AppData\Local\Temp/ccGMjGiT.s:2      *ABS*:0000003f __SREG__
+C:\Users\magku\AppData\Local\Temp/ccGMjGiT.s:3      *ABS*:0000003e __SP_H__
+C:\Users\magku\AppData\Local\Temp/ccGMjGiT.s:4      *ABS*:0000003d __SP_L__
+C:\Users\magku\AppData\Local\Temp/ccGMjGiT.s:5      *ABS*:00000034 __CCP__
+C:\Users\magku\AppData\Local\Temp/ccGMjGiT.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\magku\AppData\Local\Temp/ccGMjGiT.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\magku\AppData\Local\Temp/ccGMjGiT.s:18     .text:00000000 __vector_15
+C:\Users\magku\AppData\Local\Temp/ccGMjGiT.s:123    .bss:00000000 TIMER_wait_time_ms
+                             .bss:00000002 count.1716
+C:\Users\magku\AppData\Local\Temp/ccGMjGiT.s:75     .text:00000066 TIMER_init
+C:\Users\magku\AppData\Local\Temp/ccGMjGiT.s:97     .text:00000076 TIMER_wait_ms
                             *COM*:00000002 uint_global_prad_M1
                             *COM*:00000002 uint_global_prad_M2
                             *COM*:00000002 uint_global_prad_M3

@@ -1,4 +1,5 @@
-Adc.o: Adc.c main.h io_cfg.h Adc.h motor.h timer.h sonar.h Uart.h
+Adc.o: Adc.c main.h io_cfg.h Adc.h motor.h timer.h sonar.h sonarl.h \
+  Uart.h network.h
 
 main.h:
 
@@ -12,4 +13,8 @@ timer.h:
 
 sonar.h:
 
+sonarl.h:
+
 Uart.h:
+
+network.h:

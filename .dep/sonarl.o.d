@@ -1,4 +1,4 @@
-sonar.o: sonar.c main.h io_cfg.h Adc.h motor.h timer.h sonar.h sonarl.h \
+sonarl.o: sonarl.c main.h io_cfg.h Adc.h motor.h timer.h sonar.h sonarl.h \
   Uart.h network.h
 
 main.h:
