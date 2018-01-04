@@ -180,36 +180,28 @@
  194               	.LM36:
  195 00c8 0895      		ret
  196               	.LFE11:
- 198               		.comm uint_global_prad_M1,2,1
- 199               		.comm uint_global_prad_M2,2,1
- 200               		.comm uint_global_prad_M3,2,1
- 201               		.comm uint_global_prad_M4,2,1
- 202               		.comm uart_echo,1,1
- 203               		.comm UART0_TxHead,1,1
- 204               		.comm UART0_TxTail,1,1
- 205               		.comm UART0_RxHead,1,1
- 206               		.comm UART0_RxTail,1,1
- 207               		.comm UART1_TxHead,1,1
- 208               		.comm UART1_TxTail,1,1
- 209               		.comm UART1_RxHead,1,1
- 210               		.comm UART1_RxTail,1,1
- 259               	.Letext0:
+ 198               		.comm uart_echo,1,1
+ 199               		.comm UART0_TxHead,1,1
+ 200               		.comm UART0_TxTail,1,1
+ 201               		.comm UART0_RxHead,1,1
+ 202               		.comm UART0_RxTail,1,1
+ 203               		.comm UART1_TxHead,1,1
+ 204               		.comm UART1_TxTail,1,1
+ 205               		.comm UART1_RxHead,1,1
+ 206               		.comm UART1_RxTail,1,1
+ 255               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 motor.c
-C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:2      *ABS*:0000003f __SREG__
-C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:3      *ABS*:0000003e __SP_H__
-C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:4      *ABS*:0000003d __SP_L__
-C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:5      *ABS*:00000034 __CCP__
-C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:18     .text:00000000 MOTOR_init
-C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:48     .text:00000020 MOTOR_drive
-C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:156    .text:000000a8 MOTOR_break
-C:\Users\magku\AppData\Local\Temp/ccmEr2tK.s:182    .text:000000be MOTOR_sleep
-                            *COM*:00000002 uint_global_prad_M1
-                            *COM*:00000002 uint_global_prad_M2
-                            *COM*:00000002 uint_global_prad_M3
-                            *COM*:00000002 uint_global_prad_M4
+C:\Users\magku\AppData\Local\Temp/ccL8D0MF.s:2      *ABS*:0000003f __SREG__
+C:\Users\magku\AppData\Local\Temp/ccL8D0MF.s:3      *ABS*:0000003e __SP_H__
+C:\Users\magku\AppData\Local\Temp/ccL8D0MF.s:4      *ABS*:0000003d __SP_L__
+C:\Users\magku\AppData\Local\Temp/ccL8D0MF.s:5      *ABS*:00000034 __CCP__
+C:\Users\magku\AppData\Local\Temp/ccL8D0MF.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\magku\AppData\Local\Temp/ccL8D0MF.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\magku\AppData\Local\Temp/ccL8D0MF.s:18     .text:00000000 MOTOR_init
+C:\Users\magku\AppData\Local\Temp/ccL8D0MF.s:48     .text:00000020 MOTOR_drive
+C:\Users\magku\AppData\Local\Temp/ccL8D0MF.s:156    .text:000000a8 MOTOR_break
+C:\Users\magku\AppData\Local\Temp/ccL8D0MF.s:182    .text:000000be MOTOR_sleep
                             *COM*:00000001 uart_echo
                             *COM*:00000001 UART0_TxHead
                             *COM*:00000001 UART0_TxTail

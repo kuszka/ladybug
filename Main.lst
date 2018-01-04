@@ -54,499 +54,327 @@
   62      3020 7465 
   62      7374 0D0A 
   62      00
-  63               	.LC1:
-  64 000d 506F 6461 		.string	"Podaj nowa predkosc (-255 - 255): "
-  64      6A20 6E6F 
-  64      7761 2070 
-  64      7265 646B 
-  64      6F73 6320 
-  65               	.LC2:
-  66 0030 0D0A 00   		.string	"\r\n"
-  67               	.LC3:
-  68 0033 4A61 6E75 		.string	"Janusz2"
-  68      737A 3200 
-  69               	.LC4:
-  70 003b 556C 7472 		.string	"Ultrasonic: "
-  70      6173 6F6E 
-  70      6963 3A20 
-  70      00
-  71               	.LC5:
-  72 0048 556C 7472 		.string	"Ultrasonic2: "
-  72      6173 6F6E 
-  72      6963 323A 
-  72      2000 
-  73               		.text
-  74               	.global	main
-  76               	main:
-  77               	.LFB9:
-  78               	.LM12:
-  79 0032 2F92      		push r2
-  80 0034 3F92      		push r3
-  81 0036 4F92      		push r4
-  82 0038 5F92      		push r5
-  83 003a 6F92      		push r6
-  84 003c 7F92      		push r7
-  85 003e 8F92      		push r8
-  86 0040 9F92      		push r9
-  87 0042 AF92      		push r10
-  88 0044 BF92      		push r11
-  89 0046 CF92      		push r12
-  90 0048 DF92      		push r13
-  91 004a EF92      		push r14
-  92 004c FF92      		push r15
-  93 004e 0F93      		push r16
-  94 0050 1F93      		push r17
-  95 0052 DF93      		push r29
-  96 0054 CF93      		push r28
-  97 0056 CDB7      		in r28,__SP_L__
-  98 0058 DEB7      		in r29,__SP_H__
-  99 005a C055      		subi r28,lo8(-(-80))
- 100 005c D040      		sbci r29,hi8(-(-80))
- 101 005e 0FB6      		in __tmp_reg__,__SREG__
- 102 0060 F894      		cli
- 103 0062 DEBF      		out __SP_H__,r29
- 104 0064 0FBE      		out __SREG__,__tmp_reg__
- 105 0066 CDBF      		out __SP_L__,r28
- 106               	/* prologue: function */
- 107               	/* frame size = 80 */
- 108               	.LM13:
- 109 0068 0E94 0000 		call ioinit
- 110               	.LM14:
- 111 006c 0E94 0000 		call UART0_init
- 112               	.LM15:
- 113 0070 0E94 0000 		call TIMER_init
- 114               	.LM16:
- 115 0074 0E94 0000 		call MOTOR_init
- 116               	.LM17:
- 117 0078 0E94 0000 		call ADC_init
- 118               	.LM18:
- 119 007c 0E94 0000 		call init_sonar
- 120               	.LM19:
- 121               	/* #APP */
- 122               	 ;  72 "Main.c" 1
- 123 0080 7894      		sei
- 124               	 ;  0 "" 2
- 125               	.LM20:
- 126               	/* #NOAPP */
- 127 0082 0E94 0000 		call ADC_start_conversion
- 128               	.LM21:
- 129 0086 80E0      		ldi r24,lo8(.LC0)
- 130 0088 90E0      		ldi r25,hi8(.LC0)
- 131 008a 0E94 0000 		call UART0_print
- 132               	.LM22:
- 133 008e 969A      		sbi 50-32,6
- 134               	.LBB2:
- 135               	.LM23:
- 136 0090 91E1      		ldi r25,lo8(17)
- 137 0092 292E      		mov r2,r25
- 138 0094 312C      		mov r3,__zero_reg__
- 139 0096 2C0E      		add r2,r28
- 140 0098 3D1E      		adc r3,r29
- 141               	.LVL0:
- 142               	.L22:
- 143               	.LBE2:
- 144               	.LM24:
- 145 009a 0E94 0000 		call UART0_data_in_rx_buffer
- 146               	.LVL1:
- 147 009e 8823      		tst r24
- 148 00a0 01F0      		breq .L22
+  63               		.text
+  64               	.global	main
+  66               	main:
+  67               	.LFB9:
+  68               	.LM12:
+  69 0032 2F92      		push r2
+  70 0034 3F92      		push r3
+  71 0036 4F92      		push r4
+  72 0038 5F92      		push r5
+  73 003a 6F92      		push r6
+  74 003c 7F92      		push r7
+  75 003e 8F92      		push r8
+  76 0040 9F92      		push r9
+  77 0042 AF92      		push r10
+  78 0044 BF92      		push r11
+  79 0046 CF92      		push r12
+  80 0048 DF92      		push r13
+  81 004a EF92      		push r14
+  82 004c FF92      		push r15
+  83 004e 0F93      		push r16
+  84 0050 1F93      		push r17
+  85 0052 DF93      		push r29
+  86 0054 CF93      		push r28
+  87 0056 CDB7      		in r28,__SP_L__
+  88 0058 DEB7      		in r29,__SP_H__
+  89 005a 6497      		sbiw r28,20
+  90 005c 0FB6      		in __tmp_reg__,__SREG__
+  91 005e F894      		cli
+  92 0060 DEBF      		out __SP_H__,r29
+  93 0062 0FBE      		out __SREG__,__tmp_reg__
+  94 0064 CDBF      		out __SP_L__,r28
+  95               	/* prologue: function */
+  96               	/* frame size = 20 */
+  97               	.LM13:
+  98 0066 0E94 0000 		call ioinit
+  99               	.LM14:
+ 100 006a 0E94 0000 		call UART0_init
+ 101               	.LM15:
+ 102 006e 0E94 0000 		call TIMER_init
+ 103               	.LM16:
+ 104 0072 0E94 0000 		call MOTOR_init
+ 105               	.LM17:
+ 106 0076 0E94 0000 		call init_sonar
+ 107               	.LM18:
+ 108               	/* #APP */
+ 109               	 ;  71 "Main.c" 1
+ 110 007a 7894      		sei
+ 111               	 ;  0 "" 2
+ 112               	.LM19:
+ 113               	/* #NOAPP */
+ 114 007c 80E0      		ldi r24,lo8(.LC0)
+ 115 007e 90E0      		ldi r25,hi8(.LC0)
+ 116 0080 0E94 0000 		call UART0_print
+ 117               	.LM20:
+ 118 0084 969A      		sbi 50-32,6
+ 119               	.LVL0:
+ 120               	.L5:
+ 121 0086 82E0      		ldi r24,lo8(2)
+ 122 0088 90E0      		ldi r25,hi8(2)
+ 123               	.LVL1:
+ 124               	.L19:
+ 125               	.LM21:
+ 126 008a 0197      		sbiw r24,1
+ 127 008c 01F0      		breq .+2
+ 128 008e 00C0      		rjmp .L20
+ 129 0090 2224      		clr r2
+ 130 0092 3324      		clr r3
+ 131               	.L15:
+ 132               	.LBB2:
+ 133               	.LM22:
+ 134 0094 0E94 0000 		call UART0_data_in_rx_buffer
+ 135               	.LVL2:
+ 136 0098 8823      		tst r24
+ 137 009a 01F0      		breq .L8
+ 138               	.LM23:
+ 139 009c 0E94 0000 		call UART0_receive_byte
+ 140 00a0 8236      		cpi r24,lo8(98)
+ 141 00a2 01F4      		brne .L21
+ 142               	.L10:
+ 143               	.LM24:
+ 144 00a4 0E94 0000 		call MOTOR_break
+ 145               	.L21:
+ 146 00a8 2224      		clr r2
+ 147 00aa 3324      		clr r3
+ 148               	.L8:
  149               	.LM25:
- 150 00a2 0E94 0000 		call UART0_receive_byte
- 151 00a6 8237      		cpi r24,lo8(114)
- 152               	.LVL2:
- 153 00a8 01F0      		breq .L9
- 154 00aa 8337      		cpi r24,lo8(115)
- 155 00ac 00F4      		brsh .L14
- 156 00ae 8C36      		cpi r24,lo8(108)
- 157 00b0 01F0      		breq .L6
- 158 00b2 8D36      		cpi r24,lo8(109)
- 159 00b4 00F4      		brsh .L15
- 160 00b6 8236      		cpi r24,lo8(98)
- 161 00b8 01F4      		brne .L22
- 162 00ba 00C0      		rjmp .L26
- 163               	.L15:
- 164 00bc 8D36      		cpi r24,lo8(109)
- 165 00be 01F4      		brne .+2
- 166 00c0 00C0      		rjmp .L7
- 167 00c2 8E36      		cpi r24,lo8(110)
- 168 00c4 01F4      		brne .L22
- 169 00c6 00C0      		rjmp .L27
- 170               	.L14:
- 171 00c8 8537      		cpi r24,lo8(117)
- 172 00ca 01F4      		brne .+2
- 173 00cc 00C0      		rjmp .L11
- 174 00ce 8637      		cpi r24,lo8(118)
- 175 00d0 00F4      		brsh .L16
- 176 00d2 8337      		cpi r24,lo8(115)
- 177 00d4 01F4      		brne .L22
- 178 00d6 00C0      		rjmp .L28
- 179               	.L16:
- 180 00d8 8637      		cpi r24,lo8(118)
- 181 00da 01F0      		breq .L12
- 182 00dc 8937      		cpi r24,lo8(121)
- 183 00de 01F4      		brne .L22
- 184 00e0 00C0      		rjmp .L29
- 185               	.L12:
- 186               	.LBB3:
- 187               	.LM26:
- 188 00e2 80E0      		ldi r24,lo8(.LC1)
- 189 00e4 90E0      		ldi r25,hi8(.LC1)
- 190               	.LVL3:
- 191 00e6 0E94 0000 		call UART0_print
- 192               	.LM27:
- 193 00ea CE01      		movw r24,r28
- 194 00ec 0196      		adiw r24,1
- 195 00ee 68E0      		ldi r22,lo8(8)
- 196 00f0 0E94 0000 		call UART0_gets
- 197               	.LM28:
- 198 00f4 CE01      		movw r24,r28
- 199 00f6 0196      		adiw r24,1
- 200 00f8 0E94 0000 		call atoi
- 201 00fc 8C01      		movw r16,r24
- 202               	.LM29:
- 203 00fe 80E0      		ldi r24,lo8(.LC2)
- 204 0100 90E0      		ldi r25,hi8(.LC2)
- 205 0102 0E94 0000 		call UART0_print
- 206               	.LM30:
- 207 0106 C801      		movw r24,r16
- 208 0108 B801      		movw r22,r16
- 209 010a 00C0      		rjmp .L25
- 210               	.LVL4:
- 211               	.L26:
- 212               	.LM31:
- 213 010c 0E94 0000 		call MOTOR_break
- 214               	.LVL5:
- 215 0110 00C0      		rjmp .L22
- 216               	.LVL6:
- 217               	.L28:
- 218               	.LM32:
- 219 0112 0E94 0000 		call MOTOR_sleep
- 220               	.LVL7:
- 221 0116 00C0      		rjmp .L22
- 222               	.LVL8:
- 223               	.L9:
- 224               	.LM33:
- 225 0118 8FEF      		ldi r24,lo8(255)
- 226 011a 90E0      		ldi r25,hi8(255)
- 227               	.LVL9:
- 228 011c 60E0      		ldi r22,lo8(0)
- 229 011e 70E0      		ldi r23,hi8(0)
- 230 0120 00C0      		rjmp .L25
- 231               	.LVL10:
- 232               	.L6:
- 233               	.LM34:
- 234 0122 80E0      		ldi r24,lo8(0)
- 235 0124 90E0      		ldi r25,hi8(0)
- 236               	.LVL11:
- 237 0126 6FEF      		ldi r22,lo8(255)
- 238 0128 70E0      		ldi r23,hi8(255)
- 239 012a 00C0      		rjmp .L25
- 240               	.LVL12:
- 241               	.L27:
- 242               	.LM35:
- 243 012c 198A      		std Y+17,__zero_reg__
- 244 012e 1A8A      		std Y+18,__zero_reg__
- 245 0130 1B8A      		std Y+19,__zero_reg__
- 246 0132 1C8A      		std Y+20,__zero_reg__
- 247               	.LM36:
- 248 0134 1D8A      		std Y+21,__zero_reg__
- 249 0136 1E8A      		std Y+22,__zero_reg__
- 250 0138 1F8A      		std Y+23,__zero_reg__
- 251 013a 188E      		std Y+24,__zero_reg__
- 252               	.LM37:
- 253 013c C101      		movw r24,r2
- 254               	.LVL13:
- 255 013e 0E94 0000 		call read_sonar
- 256               	.LM38:
- 257 0142 16B3      		in r17,54-32
- 258               	.LM39:
- 259 0144 06B3      		in r16,54-32
- 260               	.LVL14:
- 261               	.LM40:
- 262 0146 8989      		ldd r24,Y+17
- 263 0148 9A89      		ldd r25,Y+18
- 264 014a AB89      		ldd r26,Y+19
- 265 014c BC89      		ldd r27,Y+20
- 266 014e 8536      		cpi r24,lo8(101)
- 267 0150 9105      		cpc r25,__zero_reg__
- 268 0152 A105      		cpc r26,__zero_reg__
- 269 0154 B105      		cpc r27,__zero_reg__
- 270 0156 00F0      		brlo .L17
- 271               	.LM41:
- 272 0158 84E6      		ldi r24,lo8(100)
- 273 015a 90E0      		ldi r25,hi8(100)
- 274 015c A0E0      		ldi r26,hlo8(100)
- 275 015e B0E0      		ldi r27,hhi8(100)
- 276 0160 898B      		std Y+17,r24
- 277 0162 9A8B      		std Y+18,r25
- 278 0164 AB8B      		std Y+19,r26
- 279 0166 BC8B      		std Y+20,r27
- 280               	.L17:
- 281               	.LM42:
- 282 0168 8D89      		ldd r24,Y+21
- 283 016a 9E89      		ldd r25,Y+22
- 284 016c AF89      		ldd r26,Y+23
- 285 016e B88D      		ldd r27,Y+24
- 286 0170 8536      		cpi r24,lo8(101)
- 287 0172 9105      		cpc r25,__zero_reg__
- 288 0174 A105      		cpc r26,__zero_reg__
- 289 0176 B105      		cpc r27,__zero_reg__
- 290 0178 00F0      		brlo .L18
- 291               	.LM43:
- 292 017a 84E6      		ldi r24,lo8(100)
- 293 017c 90E0      		ldi r25,hi8(100)
- 294 017e A0E0      		ldi r26,hlo8(100)
- 295 0180 B0E0      		ldi r27,hhi8(100)
- 296 0182 8D8B      		std Y+21,r24
- 297 0184 9E8B      		std Y+22,r25
- 298 0186 AF8B      		std Y+23,r26
- 299 0188 B88F      		std Y+24,r27
- 300               	.L18:
- 301               	.LM44:
- 302 018a 6989      		ldd r22,Y+17
- 303 018c 7A89      		ldd r23,Y+18
- 304 018e 8B89      		ldd r24,Y+19
- 305 0190 9C89      		ldd r25,Y+20
- 306 0192 24E6      		ldi r18,lo8(100)
- 307 0194 30E0      		ldi r19,hi8(100)
- 308 0196 40E0      		ldi r20,hlo8(100)
- 309 0198 50E0      		ldi r21,hhi8(100)
- 310 019a 0E94 0000 		call __udivmodsi4
- 311 019e CA01      		movw r24,r20
- 312 01a0 B901      		movw r22,r18
- 313 01a2 0E94 0000 		call __floatunsisf
- 314 01a6 6196      		adiw r28,77-60
- 315 01a8 6CAF      		std Y+60,r22
- 316 01aa 7DAF      		std Y+61,r23
- 317 01ac 8EAF      		std Y+62,r24
- 318 01ae 9FAF      		std Y+63,r25
- 319 01b0 6197      		sbiw r28,77-60
- 320               	.LM45:
- 321 01b2 6D89      		ldd r22,Y+21
- 322 01b4 7E89      		ldd r23,Y+22
- 323 01b6 8F89      		ldd r24,Y+23
- 324 01b8 988D      		ldd r25,Y+24
- 325 01ba 24E6      		ldi r18,lo8(100)
- 326 01bc 30E0      		ldi r19,hi8(100)
- 327 01be 40E0      		ldi r20,hlo8(100)
- 328 01c0 50E0      		ldi r21,hhi8(100)
- 329 01c2 0E94 0000 		call __udivmodsi4
- 330 01c6 CA01      		movw r24,r20
- 331 01c8 B901      		movw r22,r18
- 332 01ca 0E94 0000 		call __floatunsisf
- 333 01ce 2B01      		movw r4,r22
- 334 01d0 3C01      		movw r6,r24
- 335               	.LM46:
- 336 01d2 80E0      		ldi r24,lo8(0x0)
- 337 01d4 90E0      		ldi r25,hi8(0x0)
- 338 01d6 A0E0      		ldi r26,hlo8(0x0)
- 339 01d8 B0E0      		ldi r27,hhi8(0x0)
- 340 01da 8987      		std Y+9,r24
- 341 01dc 9A87      		std Y+10,r25
- 342 01de AB87      		std Y+11,r26
- 343 01e0 BC87      		std Y+12,r27
- 344               	.LM47:
- 345 01e2 8D87      		std Y+13,r24
- 346 01e4 9E87      		std Y+14,r25
- 347 01e6 AF87      		std Y+15,r26
- 348 01e8 B88B      		std Y+16,r27
- 349               	.LM48:
- 350 01ea 612F      		mov r22,r17
- 351 01ec 70E0      		ldi r23,lo8(0)
- 352 01ee 7695      		lsr r23
- 353 01f0 6795      		ror r22
- 354 01f2 6170      		andi r22,lo8(1)
- 355 01f4 7070      		andi r23,hi8(1)
- 356 01f6 8827      		clr r24
- 357 01f8 77FD      		sbrc r23,7
- 358 01fa 8095      		com r24
- 359 01fc 982F      		mov r25,r24
- 360 01fe 0E94 0000 		call __floatsisf
- 361 0202 6B01      		movw r12,r22
- 362 0204 7C01      		movw r14,r24
- 363 0206 602F      		mov r22,r16
- 364 0208 70E0      		ldi r23,lo8(0)
- 365 020a 6170      		andi r22,lo8(1)
- 366 020c 7070      		andi r23,hi8(1)
- 367 020e 8827      		clr r24
- 368 0210 77FD      		sbrc r23,7
- 369 0212 8095      		com r24
- 370 0214 982F      		mov r25,r24
- 371 0216 0E94 0000 		call __floatsisf
- 372 021a 4B01      		movw r8,r22
- 373 021c 5C01      		movw r10,r24
- 374 021e CE01      		movw r24,r28
- 375 0220 0996      		adiw r24,9
- 376 0222 B301      		movw r22,r6
- 377 0224 A201      		movw r20,r4
- 378 0226 6196      		adiw r28,77-60
- 379 0228 0CAD      		ldd r16,Y+60
- 380 022a 1DAD      		ldd r17,Y+61
- 381 022c 2EAD      		ldd r18,Y+62
- 382 022e 3FAD      		ldd r19,Y+63
- 383 0230 6197      		sbiw r28,77-60
- 384 0232 0E94 0000 		call network
- 385               	.LM49:
- 386 0236 6985      		ldd r22,Y+9
- 387 0238 7A85      		ldd r23,Y+10
- 388 023a 8B85      		ldd r24,Y+11
- 389 023c 9C85      		ldd r25,Y+12
- 390 023e 4AE0      		ldi r20,lo8(10)
- 391 0240 25E0      		ldi r18,lo8(5)
- 392 0242 8E01      		movw r16,r28
- 393 0244 075E      		subi r16,lo8(-(25))
- 394 0246 1F4F      		sbci r17,hi8(-(25))
- 395 0248 0E94 0000 		call dtostrf
- 396               	.LM50:
- 397 024c 6D85      		ldd r22,Y+13
- 398 024e 7E85      		ldd r23,Y+14
- 399 0250 8F85      		ldd r24,Y+15
- 400 0252 9889      		ldd r25,Y+16
- 401 0254 4AE0      		ldi r20,lo8(10)
- 402 0256 25E0      		ldi r18,lo8(5)
- 403 0258 8E01      		movw r16,r28
- 404 025a 0D5D      		subi r16,lo8(-(35))
- 405 025c 1F4F      		sbci r17,hi8(-(35))
- 406 025e 0E94 0000 		call dtostrf
- 407               	.LM51:
- 408 0262 CE01      		movw r24,r28
- 409 0264 4996      		adiw r24,25
- 410 0266 0E94 0000 		call UART0_print
- 411               	.LM52:
- 412 026a 80E0      		ldi r24,lo8(.LC2)
- 413 026c 90E0      		ldi r25,hi8(.LC2)
- 414 026e 0E94 0000 		call UART0_print
- 415               	.LM53:
- 416 0272 C801      		movw r24,r16
- 417 0274 0E94 0000 		call UART0_print
- 418               	.LM54:
- 419 0278 80E0      		ldi r24,lo8(.LC2)
- 420 027a 90E0      		ldi r25,hi8(.LC2)
- 421 027c 0E94 0000 		call UART0_print
- 422               	.LM55:
- 423 0280 6D85      		ldd r22,Y+13
- 424 0282 7E85      		ldd r23,Y+14
- 425 0284 8F85      		ldd r24,Y+15
- 426 0286 9889      		ldd r25,Y+16
- 427 0288 20E0      		ldi r18,lo8(0x437f0000)
- 428 028a 30E0      		ldi r19,hi8(0x437f0000)
- 429 028c 4FE7      		ldi r20,hlo8(0x437f0000)
- 430 028e 53E4      		ldi r21,hhi8(0x437f0000)
- 431 0290 0E94 0000 		call __mulsf3
- 432 0294 0E94 0000 		call __fixsfsi
- 433 0298 7B01      		movw r14,r22
- 434 029a 8C01      		movw r16,r24
- 435 029c 6985      		ldd r22,Y+9
- 436 029e 7A85      		ldd r23,Y+10
- 437 02a0 8B85      		ldd r24,Y+11
- 438 02a2 9C85      		ldd r25,Y+12
- 439 02a4 20E0      		ldi r18,lo8(0x437f0000)
- 440 02a6 30E0      		ldi r19,hi8(0x437f0000)
- 441 02a8 4FE7      		ldi r20,hlo8(0x437f0000)
- 442 02aa 53E4      		ldi r21,hhi8(0x437f0000)
- 443 02ac 0E94 0000 		call __mulsf3
- 444 02b0 0E94 0000 		call __fixsfsi
- 445 02b4 9B01      		movw r18,r22
- 446 02b6 AC01      		movw r20,r24
- 447 02b8 C701      		movw r24,r14
- 448 02ba B901      		movw r22,r18
- 449               	.LVL15:
- 450               	.L25:
- 451 02bc 0E94 0000 		call MOTOR_drive
- 452 02c0 00C0      		rjmp .L22
- 453               	.LVL16:
- 454               	.L7:
- 455               	.LM56:
- 456 02c2 B19B      		sbis 54-32,1
- 457 02c4 00C0      		rjmp .L22
- 458               	.LM57:
- 459 02c6 80E0      		ldi r24,lo8(.LC3)
- 460 02c8 90E0      		ldi r25,hi8(.LC3)
- 461               	.LVL17:
- 462 02ca 00C0      		rjmp .L24
- 463               	.LVL18:
- 464               	.L11:
- 465               	.LM58:
- 466 02cc 80E0      		ldi r24,lo8(.LC4)
- 467 02ce 90E0      		ldi r25,hi8(.LC4)
- 468               	.LVL19:
- 469 02d0 0E94 0000 		call UART0_print
- 470               	.LM59:
- 471 02d4 C101      		movw r24,r2
- 472 02d6 0E94 0000 		call read_sonar
- 473               	.LM60:
- 474 02da 8989      		ldd r24,Y+17
- 475 02dc 9A89      		ldd r25,Y+18
- 476 02de BE01      		movw r22,r28
- 477 02e0 635D      		subi r22,lo8(-(45))
- 478 02e2 7F4F      		sbci r23,hi8(-(45))
- 479 02e4 4AE0      		ldi r20,lo8(10)
- 480 02e6 50E0      		ldi r21,hi8(10)
- 481 02e8 0E94 0000 		call itoa
- 482               	.LM61:
- 483 02ec CE01      		movw r24,r28
- 484 02ee 8D96      		adiw r24,45
- 485 02f0 00C0      		rjmp .L23
- 486               	.LVL20:
- 487               	.L29:
- 488               	.LM62:
- 489 02f2 80E0      		ldi r24,lo8(.LC5)
- 490 02f4 90E0      		ldi r25,hi8(.LC5)
- 491               	.LVL21:
- 492 02f6 0E94 0000 		call UART0_print
- 493               	.LM63:
- 494 02fa C101      		movw r24,r2
- 495 02fc 0E94 0000 		call read_sonar
- 496               	.LM64:
- 497 0300 8D89      		ldd r24,Y+21
- 498 0302 9E89      		ldd r25,Y+22
- 499 0304 BE01      		movw r22,r28
- 500 0306 635C      		subi r22,lo8(-(61))
- 501 0308 7F4F      		sbci r23,hi8(-(61))
- 502 030a 4AE0      		ldi r20,lo8(10)
- 503 030c 50E0      		ldi r21,hi8(10)
- 504 030e 0E94 0000 		call itoa
- 505               	.LM65:
- 506 0312 CE01      		movw r24,r28
- 507 0314 CD96      		adiw r24,61
- 508               	.L23:
- 509 0316 0E94 0000 		call UART0_print
- 510               	.LM66:
- 511 031a 80E0      		ldi r24,lo8(.LC2)
- 512 031c 90E0      		ldi r25,hi8(.LC2)
- 513               	.L24:
- 514 031e 0E94 0000 		call UART0_print
- 515 0322 00C0      		rjmp .L22
- 516               	.LBE3:
- 517               	.LFE9:
- 519               		.comm uint_global_prad_M1,2,1
- 520               		.comm uint_global_prad_M2,2,1
- 521               		.comm uint_global_prad_M3,2,1
- 522               		.comm uint_global_prad_M4,2,1
- 523               		.comm uart_echo,1,1
- 524               		.comm UART0_TxHead,1,1
- 525               		.comm UART0_TxTail,1,1
- 526               		.comm UART0_RxHead,1,1
- 527               		.comm UART0_RxTail,1,1
- 528               		.comm UART1_TxHead,1,1
- 529               		.comm UART1_TxTail,1,1
- 530               		.comm UART1_RxHead,1,1
- 531               		.comm UART1_RxTail,1,1
- 564               	.Letext0:
+ 150 00ac 1986      		std Y+9,__zero_reg__
+ 151 00ae 1A86      		std Y+10,__zero_reg__
+ 152 00b0 1B86      		std Y+11,__zero_reg__
+ 153 00b2 1C86      		std Y+12,__zero_reg__
+ 154               	.LM26:
+ 155 00b4 1D86      		std Y+13,__zero_reg__
+ 156 00b6 1E86      		std Y+14,__zero_reg__
+ 157 00b8 1F86      		std Y+15,__zero_reg__
+ 158 00ba 188A      		std Y+16,__zero_reg__
+ 159               	.LM27:
+ 160 00bc CE01      		movw r24,r28
+ 161 00be 0996      		adiw r24,9
+ 162 00c0 0E94 0000 		call read_sonar
+ 163               	.LM28:
+ 164 00c4 16B3      		in r17,54-32
+ 165               	.LM29:
+ 166 00c6 06B3      		in r16,54-32
+ 167               	.LVL3:
+ 168               	.LM30:
+ 169 00c8 8985      		ldd r24,Y+9
+ 170 00ca 9A85      		ldd r25,Y+10
+ 171 00cc AB85      		ldd r26,Y+11
+ 172 00ce BC85      		ldd r27,Y+12
+ 173 00d0 8536      		cpi r24,lo8(101)
+ 174 00d2 9105      		cpc r25,__zero_reg__
+ 175 00d4 A105      		cpc r26,__zero_reg__
+ 176 00d6 B105      		cpc r27,__zero_reg__
+ 177 00d8 00F0      		brlo .L11
+ 178               	.LM31:
+ 179 00da 84E6      		ldi r24,lo8(100)
+ 180 00dc 90E0      		ldi r25,hi8(100)
+ 181 00de A0E0      		ldi r26,hlo8(100)
+ 182 00e0 B0E0      		ldi r27,hhi8(100)
+ 183 00e2 8987      		std Y+9,r24
+ 184 00e4 9A87      		std Y+10,r25
+ 185 00e6 AB87      		std Y+11,r26
+ 186 00e8 BC87      		std Y+12,r27
+ 187               	.L11:
+ 188               	.LM32:
+ 189 00ea 8D85      		ldd r24,Y+13
+ 190 00ec 9E85      		ldd r25,Y+14
+ 191 00ee AF85      		ldd r26,Y+15
+ 192 00f0 B889      		ldd r27,Y+16
+ 193 00f2 8536      		cpi r24,lo8(101)
+ 194 00f4 9105      		cpc r25,__zero_reg__
+ 195 00f6 A105      		cpc r26,__zero_reg__
+ 196 00f8 B105      		cpc r27,__zero_reg__
+ 197 00fa 00F0      		brlo .L12
+ 198               	.LM33:
+ 199 00fc 84E6      		ldi r24,lo8(100)
+ 200 00fe 90E0      		ldi r25,hi8(100)
+ 201 0100 A0E0      		ldi r26,hlo8(100)
+ 202 0102 B0E0      		ldi r27,hhi8(100)
+ 203 0104 8D87      		std Y+13,r24
+ 204 0106 9E87      		std Y+14,r25
+ 205 0108 AF87      		std Y+15,r26
+ 206 010a B88B      		std Y+16,r27
+ 207               	.L12:
+ 208               	.LM34:
+ 209 010c 6985      		ldd r22,Y+9
+ 210 010e 7A85      		ldd r23,Y+10
+ 211 0110 8B85      		ldd r24,Y+11
+ 212 0112 9C85      		ldd r25,Y+12
+ 213 0114 24E6      		ldi r18,lo8(100)
+ 214 0116 30E0      		ldi r19,hi8(100)
+ 215 0118 40E0      		ldi r20,hlo8(100)
+ 216 011a 50E0      		ldi r21,hhi8(100)
+ 217 011c 0E94 0000 		call __udivmodsi4
+ 218 0120 CA01      		movw r24,r20
+ 219 0122 B901      		movw r22,r18
+ 220 0124 0E94 0000 		call __floatunsisf
+ 221 0128 698B      		std Y+17,r22
+ 222 012a 7A8B      		std Y+18,r23
+ 223 012c 8B8B      		std Y+19,r24
+ 224 012e 9C8B      		std Y+20,r25
+ 225               	.LM35:
+ 226 0130 6D85      		ldd r22,Y+13
+ 227 0132 7E85      		ldd r23,Y+14
+ 228 0134 8F85      		ldd r24,Y+15
+ 229 0136 9889      		ldd r25,Y+16
+ 230 0138 24E6      		ldi r18,lo8(100)
+ 231 013a 30E0      		ldi r19,hi8(100)
+ 232 013c 40E0      		ldi r20,hlo8(100)
+ 233 013e 50E0      		ldi r21,hhi8(100)
+ 234 0140 0E94 0000 		call __udivmodsi4
+ 235 0144 CA01      		movw r24,r20
+ 236 0146 B901      		movw r22,r18
+ 237 0148 0E94 0000 		call __floatunsisf
+ 238 014c 2B01      		movw r4,r22
+ 239 014e 3C01      		movw r6,r24
+ 240               	.LM36:
+ 241 0150 80E0      		ldi r24,lo8(0x0)
+ 242 0152 90E0      		ldi r25,hi8(0x0)
+ 243 0154 A0E0      		ldi r26,hlo8(0x0)
+ 244 0156 B0E0      		ldi r27,hhi8(0x0)
+ 245 0158 8983      		std Y+1,r24
+ 246 015a 9A83      		std Y+2,r25
+ 247 015c AB83      		std Y+3,r26
+ 248 015e BC83      		std Y+4,r27
+ 249               	.LM37:
+ 250 0160 8D83      		std Y+5,r24
+ 251 0162 9E83      		std Y+6,r25
+ 252 0164 AF83      		std Y+7,r26
+ 253 0166 B887      		std Y+8,r27
+ 254               	.LM38:
+ 255 0168 612F      		mov r22,r17
+ 256 016a 70E0      		ldi r23,lo8(0)
+ 257 016c 7695      		lsr r23
+ 258 016e 6795      		ror r22
+ 259 0170 6170      		andi r22,lo8(1)
+ 260 0172 7070      		andi r23,hi8(1)
+ 261 0174 8827      		clr r24
+ 262 0176 77FD      		sbrc r23,7
+ 263 0178 8095      		com r24
+ 264 017a 982F      		mov r25,r24
+ 265 017c 0E94 0000 		call __floatsisf
+ 266 0180 6B01      		movw r12,r22
+ 267 0182 7C01      		movw r14,r24
+ 268 0184 602F      		mov r22,r16
+ 269 0186 70E0      		ldi r23,lo8(0)
+ 270 0188 6170      		andi r22,lo8(1)
+ 271 018a 7070      		andi r23,hi8(1)
+ 272 018c 8827      		clr r24
+ 273 018e 77FD      		sbrc r23,7
+ 274 0190 8095      		com r24
+ 275 0192 982F      		mov r25,r24
+ 276 0194 0E94 0000 		call __floatsisf
+ 277 0198 4B01      		movw r8,r22
+ 278 019a 5C01      		movw r10,r24
+ 279 019c CE01      		movw r24,r28
+ 280 019e 0196      		adiw r24,1
+ 281 01a0 B301      		movw r22,r6
+ 282 01a2 A201      		movw r20,r4
+ 283 01a4 0989      		ldd r16,Y+17
+ 284 01a6 1A89      		ldd r17,Y+18
+ 285 01a8 2B89      		ldd r18,Y+19
+ 286 01aa 3C89      		ldd r19,Y+20
+ 287 01ac 0E94 0000 		call network
+ 288               	.LM39:
+ 289 01b0 6981      		ldd r22,Y+1
+ 290 01b2 7A81      		ldd r23,Y+2
+ 291 01b4 8B81      		ldd r24,Y+3
+ 292 01b6 9C81      		ldd r25,Y+4
+ 293 01b8 20E0      		ldi r18,lo8(0x437f0000)
+ 294 01ba 30E0      		ldi r19,hi8(0x437f0000)
+ 295 01bc 4FE7      		ldi r20,hlo8(0x437f0000)
+ 296 01be 53E4      		ldi r21,hhi8(0x437f0000)
+ 297 01c0 0E94 0000 		call __mulsf3
+ 298 01c4 0E94 0000 		call __fixsfsi
+ 299 01c8 8B01      		movw r16,r22
+ 300               	.LVL4:
+ 301               	.LM40:
+ 302 01ca 6D81      		ldd r22,Y+5
+ 303 01cc 7E81      		ldd r23,Y+6
+ 304 01ce 8F81      		ldd r24,Y+7
+ 305 01d0 9885      		ldd r25,Y+8
+ 306 01d2 20E0      		ldi r18,lo8(0x437f0000)
+ 307 01d4 30E0      		ldi r19,hi8(0x437f0000)
+ 308 01d6 4FE7      		ldi r20,hlo8(0x437f0000)
+ 309 01d8 53E4      		ldi r21,hhi8(0x437f0000)
+ 310 01da 0E94 0000 		call __mulsf3
+ 311 01de 0E94 0000 		call __fixsfsi
+ 312 01e2 CB01      		movw r24,r22
+ 313               	.LVL5:
+ 314               	.LM41:
+ 315 01e4 0233      		cpi r16,50
+ 316 01e6 1105      		cpc r17,__zero_reg__
+ 317 01e8 04F4      		brge .L13
+ 318 01ea 6233      		cpi r22,50
+ 319 01ec 7105      		cpc r23,__zero_reg__
+ 320 01ee 04F4      		brge .L13
+ 321               	.LVL6:
+ 322               	.LM42:
+ 323 01f0 0E94 0000 		call MOTOR_sleep
+ 324               	.LVL7:
+ 325 01f4 00C0      		rjmp .L14
+ 326               	.LVL8:
+ 327               	.L13:
+ 328               	.LM43:
+ 329 01f6 B801      		movw r22,r16
+ 330 01f8 0E94 0000 		call MOTOR_drive
+ 331               	.LVL9:
+ 332               	.L14:
+ 333               	.LM44:
+ 334 01fc 0894      		sec
+ 335 01fe 211C      		adc r2,__zero_reg__
+ 336 0200 311C      		adc r3,__zero_reg__
+ 337               	.LBE2:
+ 338               	.LM45:
+ 339 0202 9AE0      		ldi r25,lo8(10)
+ 340 0204 2916      		cp r2,r25
+ 341 0206 3104      		cpc r3,__zero_reg__
+ 342 0208 04F4      		brge .+2
+ 343 020a 00C0      		rjmp .L15
+ 344               	.LM46:
+ 345 020c 0E94 0000 		call MOTOR_break
+ 346 0210 00C0      		rjmp .L5
+ 347               	.LVL10:
+ 348               	.L20:
+ 349               	.LM47:
+ 350 0212 0E94 0000 		call UART0_data_in_rx_buffer
+ 351               	.LVL11:
+ 352 0216 8823      		tst r24
+ 353 0218 01F4      		brne .+2
+ 354 021a 00C0      		rjmp .L5
+ 355               	.LM48:
+ 356 021c 0E94 0000 		call UART0_receive_byte
+ 357 0220 8136      		cpi r24,lo8(97)
+ 358 0222 01F0      		breq .+2
+ 359 0224 00C0      		rjmp .L5
+ 360 0226 81E0      		ldi r24,lo8(1)
+ 361 0228 90E0      		ldi r25,hi8(1)
+ 362               	.LVL12:
+ 363 022a 00C0      		rjmp .L19
+ 364               	.LFE9:
+ 366               		.comm uart_echo,1,1
+ 367               		.comm UART0_TxHead,1,1
+ 368               		.comm UART0_TxTail,1,1
+ 369               		.comm UART0_RxHead,1,1
+ 370               		.comm UART0_RxTail,1,1
+ 371               		.comm UART1_TxHead,1,1
+ 372               		.comm UART1_TxTail,1,1
+ 373               		.comm UART1_RxHead,1,1
+ 374               		.comm UART1_RxTail,1,1
+ 407               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 Main.c
-C:\Users\magku\AppData\Local\Temp/cczYntON.s:2      *ABS*:0000003f __SREG__
-C:\Users\magku\AppData\Local\Temp/cczYntON.s:3      *ABS*:0000003e __SP_H__
-C:\Users\magku\AppData\Local\Temp/cczYntON.s:4      *ABS*:0000003d __SP_L__
-C:\Users\magku\AppData\Local\Temp/cczYntON.s:5      *ABS*:00000034 __CCP__
-C:\Users\magku\AppData\Local\Temp/cczYntON.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\magku\AppData\Local\Temp/cczYntON.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\magku\AppData\Local\Temp/cczYntON.s:18     .text:00000000 ioinit
-C:\Users\magku\AppData\Local\Temp/cczYntON.s:76     .text:00000032 main
-                            *COM*:00000002 uint_global_prad_M1
-                            *COM*:00000002 uint_global_prad_M2
-                            *COM*:00000002 uint_global_prad_M3
-                            *COM*:00000002 uint_global_prad_M4
+C:\Users\magku\AppData\Local\Temp/ccyVaVb9.s:2      *ABS*:0000003f __SREG__
+C:\Users\magku\AppData\Local\Temp/ccyVaVb9.s:3      *ABS*:0000003e __SP_H__
+C:\Users\magku\AppData\Local\Temp/ccyVaVb9.s:4      *ABS*:0000003d __SP_L__
+C:\Users\magku\AppData\Local\Temp/ccyVaVb9.s:5      *ABS*:00000034 __CCP__
+C:\Users\magku\AppData\Local\Temp/ccyVaVb9.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\magku\AppData\Local\Temp/ccyVaVb9.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\magku\AppData\Local\Temp/ccyVaVb9.s:18     .text:00000000 ioinit
+C:\Users\magku\AppData\Local\Temp/ccyVaVb9.s:66     .text:00000032 main
                             *COM*:00000001 uart_echo
                             *COM*:00000001 UART0_TxHead
                             *COM*:00000001 UART0_TxTail
@@ -561,25 +389,19 @@ UNDEFINED SYMBOLS
 UART0_init
 TIMER_init
 MOTOR_init
-ADC_init
 init_sonar
-ADC_start_conversion
 UART0_print
 UART0_data_in_rx_buffer
 UART0_receive_byte
-UART0_gets
-atoi
 MOTOR_break
-MOTOR_sleep
 read_sonar
 __udivmodsi4
 __floatunsisf
 __floatsisf
 network
-dtostrf
 __mulsf3
 __fixsfsi
+MOTOR_sleep
 MOTOR_drive
-itoa
 __do_copy_data
 __do_clear_bss

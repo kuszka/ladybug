@@ -398,36 +398,28 @@
  412               	.LVL19:
  413 019e 0895      		ret
  414               	.LFE11:
- 416               		.comm uint_global_prad_M1,2,1
- 417               		.comm uint_global_prad_M2,2,1
- 418               		.comm uint_global_prad_M3,2,1
- 419               		.comm uint_global_prad_M4,2,1
- 420               		.comm uart_echo,1,1
- 421               		.comm UART0_TxHead,1,1
- 422               		.comm UART0_TxTail,1,1
- 423               		.comm UART0_RxHead,1,1
- 424               		.comm UART0_RxTail,1,1
- 425               		.comm UART1_TxHead,1,1
- 426               		.comm UART1_TxTail,1,1
- 427               		.comm UART1_RxHead,1,1
- 428               		.comm UART1_RxTail,1,1
- 477               	.Letext0:
+ 416               		.comm uart_echo,1,1
+ 417               		.comm UART0_TxHead,1,1
+ 418               		.comm UART0_TxTail,1,1
+ 419               		.comm UART0_RxHead,1,1
+ 420               		.comm UART0_RxTail,1,1
+ 421               		.comm UART1_TxHead,1,1
+ 422               		.comm UART1_TxTail,1,1
+ 423               		.comm UART1_RxHead,1,1
+ 424               		.comm UART1_RxTail,1,1
+ 473               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 sonar.c
-C:\Users\magku\AppData\Local\Temp/ccKjrZwE.s:2      *ABS*:0000003f __SREG__
-C:\Users\magku\AppData\Local\Temp/ccKjrZwE.s:3      *ABS*:0000003e __SP_H__
-C:\Users\magku\AppData\Local\Temp/ccKjrZwE.s:4      *ABS*:0000003d __SP_L__
-C:\Users\magku\AppData\Local\Temp/ccKjrZwE.s:5      *ABS*:00000034 __CCP__
-C:\Users\magku\AppData\Local\Temp/ccKjrZwE.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\magku\AppData\Local\Temp/ccKjrZwE.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\magku\AppData\Local\Temp/ccKjrZwE.s:18     .text:00000000 init_sonar
-C:\Users\magku\AppData\Local\Temp/ccKjrZwE.s:38     .text:0000000a trigger_sonar_left
-C:\Users\magku\AppData\Local\Temp/ccKjrZwE.s:107    .text:00000024 trigger_sonar_right
-C:\Users\magku\AppData\Local\Temp/ccKjrZwE.s:176    .text:0000003e read_sonar
-                            *COM*:00000002 uint_global_prad_M1
-                            *COM*:00000002 uint_global_prad_M2
-                            *COM*:00000002 uint_global_prad_M3
-                            *COM*:00000002 uint_global_prad_M4
+C:\Users\magku\AppData\Local\Temp/ccnWgIK2.s:2      *ABS*:0000003f __SREG__
+C:\Users\magku\AppData\Local\Temp/ccnWgIK2.s:3      *ABS*:0000003e __SP_H__
+C:\Users\magku\AppData\Local\Temp/ccnWgIK2.s:4      *ABS*:0000003d __SP_L__
+C:\Users\magku\AppData\Local\Temp/ccnWgIK2.s:5      *ABS*:00000034 __CCP__
+C:\Users\magku\AppData\Local\Temp/ccnWgIK2.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\magku\AppData\Local\Temp/ccnWgIK2.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\magku\AppData\Local\Temp/ccnWgIK2.s:18     .text:00000000 init_sonar
+C:\Users\magku\AppData\Local\Temp/ccnWgIK2.s:38     .text:0000000a trigger_sonar_left
+C:\Users\magku\AppData\Local\Temp/ccnWgIK2.s:107    .text:00000024 trigger_sonar_right
+C:\Users\magku\AppData\Local\Temp/ccnWgIK2.s:176    .text:0000003e read_sonar
                             *COM*:00000001 uart_echo
                             *COM*:00000001 UART0_TxHead
                             *COM*:00000001 UART0_TxTail

@@ -23,7 +23,6 @@ oraz definicje mart sluzacych do zapalania, gaszenia oraz przelaczania diod LED
 #include <stdlib.h>
 
 #include "io_cfg.h"
-#include "Adc.h"
 #include "motor.h"
 #include "timer.h"
 #include "sonar.h"

@@ -61,117 +61,103 @@ int main(void)
 	float ultrasonics_normalized[2];
 	int pir_l;
 	int pir_r;
-    int itmp;
 	    
     ioinit();	
 	UART0_init();					  
     TIMER_init();
     MOTOR_init();
-    ADC_init();
+    //ADC_init();
 	init_sonar();
     sei();	//globalne wlaczenie przerwan
 	
 	//uint32_t distance = 0;
     
-	ADC_start_conversion();
+	//ADC_start_conversion();
 	
 	UART0_print("UART0 test\r\n");
 	LED2_OFF;
+	int state =2;
+	int i;
 	
 	for(;;) //glowna petla programu
-	{
-		if(UART0_data_in_rx_buffer())
-		{
-			switch(rcv = UART0_receive_byte()){
-				case 'v':
-						UART0_print("Podaj nowa predkosc (-255 - 255): ");
-						UART0_gets(tmp,8);
-						itmp = atoi(tmp);
-						UART0_print("\r\n");
-						MOTOR_drive(itmp,itmp);
-						break;		
-					case 'b':
-						MOTOR_break();						
-						break;
-					case 's':
+	{	
+		switch(state){
+			case 1:
+				i = 0;
+				while(i<10){
+					if(UART0_data_in_rx_buffer()){
+						i=0;
+						switch(rcv = UART0_receive_byte()){	
+							case 'b':
+								MOTOR_break();						
+							break;					
+						}
+					}
+			
+					ultrasonics[0] = 0;
+					ultrasonics[1] = 0;
+					read_sonar(ultrasonics);
+					pir_l = 0;
+					pir_r = 0;
+					//char out[10];
+					//char out1[10];
+									
+					if((PINB & (1<<PIR2)))            // check for sensor pin PC.0 using bit
+					{
+						pir_l = 1;
+					}
+									
+					if((PINB & (1<<PIR1)))            // check for sensor pin PC.0 using bit
+					{
+						pir_r = 1;
+					}
+									
+					if(ultrasonics[0] > 100)            // check for sensor pin PC.0 using bit
+					{
+						ultrasonics[0] = 100;
+					}
+									
+					if(ultrasonics[1] > 100)            // check for sensor pin PC.0 using bit
+					{
+						ultrasonics[1] = 100;
+					}
+					ultrasonics_normalized[0]= ultrasonics[0]/100;
+					ultrasonics_normalized[1]= ultrasonics[1]/100;
+					output[0] = 0;
+					output[1] = 0;
+					network(output, ultrasonics_normalized[1], ultrasonics_normalized[0], pir_l, pir_r);
+					//dtostrf(output[0], 10, 5, out);
+					//dtostrf(output[1], 10, 5, out1);
+					//UART0_print(out);
+					//UART0_print("\r\n");
+					//UART0_print(out1);
+					//UART0_print("\r\n");
+					int left = (int)(output[0]*255);
+					int right = (int)(output[1]*255);
+					if ((left<50) & (right < 50)){
 						MOTOR_sleep();
-						break;
-					case 'r':
-						MOTOR_drive(255,0);
-						break;				
-					case 'l':
-						MOTOR_drive(0,255);
-						break;
-					case 'n':
-						ultrasonics[0] = 0;
-						ultrasonics[1] = 0;
-						read_sonar(ultrasonics);
-						pir_l = 0;
-						pir_r = 0;
-						char lf[10];
-						char rgt[10];
-						char out[10];
-						char out1[10];
-						
-						if((PINB & (1<<PIR2)))            // check for sensor pin PC.0 using bit
-						{
-							pir_l = 1;
-						}
-						
-						if((PINB & (1<<PIR1)))            // check for sensor pin PC.0 using bit
-						{
-							pir_r = 1;
-						}
-						
-						if(ultrasonics[0] > 100)            // check for sensor pin PC.0 using bit
-						{
-							ultrasonics[0] = 100;
-						}
-						
-						if(ultrasonics[1] > 100)            // check for sensor pin PC.0 using bit
-						{
-							ultrasonics[1] = 100;
-						}
-						ultrasonics_normalized[0]= ultrasonics[0]/100;
-						ultrasonics_normalized[1]= ultrasonics[1]/100;
-						output[0] = 0;
-						output[1] = 0;
-						network(output, ultrasonics_normalized[1], ultrasonics_normalized[0], pir_l, pir_r);
-						dtostrf(output[0], 10, 5, out);
-						dtostrf(output[1], 10, 5, out1);
-						UART0_print(out);
-						UART0_print("\r\n");
-						UART0_print(out1);
-						UART0_print("\r\n");
-						int left = (int)(output[0]*255);
-						int right = (int)(output[1]*255);
+					}
+					else{
 						MOTOR_drive(right,left);
-						break;
-					case 'm':
-						if((PINB & (1<<PIR2)))            // check for sensor pin PC.0 using bit
-							{
-								UART0_print("Janusz2");
-							}
-						break;
-					case 'u':
-						UART0_print("Ultrasonic: ");
-						read_sonar(ultrasonics);
-						char str[16];
-						itoa (ultrasonics[0],str,10);
-						UART0_print(str);
-						UART0_print("\r\n");
-						break;		
-					case 'y':
-						UART0_print("Ultrasonic2: ");
-						read_sonar(ultrasonics);
-						char str2[16];
-						itoa (ultrasonics[1],str2,10);
-						UART0_print(str2);
-						UART0_print("\r\n");
-						break;							
-			}
-		}		
-	}
-    
-return 0;
+					}
+					i++;
+				}
+				MOTOR_break();
+				state = 2;
+				break;
+			case 2:
+				if(UART0_data_in_rx_buffer()){
+					switch(rcv = UART0_receive_byte()){	
+						case 'a':
+							state = 1;						
+						break;					
+					}
+				}
+				break;
+			default:
+				state = 2;
+				break;
+		}
+    }
+	return 0;
 }

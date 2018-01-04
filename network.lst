@@ -342,9 +342,9 @@
  352 024c 8F16      		cp r8,r31
  353 024e 9104      		cpc r9,__zero_reg__
  354 0250 01F4      		brne .L5
- 355 0252 20E0      		ldi r18,lo8(outer_result.1748)
+ 355 0252 20E0      		ldi r18,lo8(outer_result.1736)
  356 0254 422E      		mov r4,r18
- 357 0256 20E0      		ldi r18,hi8(outer_result.1748)
+ 357 0256 20E0      		ldi r18,hi8(outer_result.1736)
  358 0258 522E      		mov r5,r18
  359 025a 90E0      		ldi r25,lo8(bias_out)
  360 025c 292E      		mov r2,r25
@@ -496,10 +496,10 @@
  506               	.LM21:
  507 035c 00D0      		rcall .
  508 035e 00D0      		rcall .
- 509 0360 6091 0000 		lds r22,outer_result.1748
- 510 0364 7091 0000 		lds r23,(outer_result.1748)+1
- 511 0368 8091 0000 		lds r24,(outer_result.1748)+2
- 512 036c 9091 0000 		lds r25,(outer_result.1748)+3
+ 509 0360 6091 0000 		lds r22,outer_result.1736
+ 510 0364 7091 0000 		lds r23,(outer_result.1736)+1
+ 511 0368 8091 0000 		lds r24,(outer_result.1736)+2
+ 512 036c 9091 0000 		lds r25,(outer_result.1736)+3
  513 0370 0F2E      		mov __tmp_reg__,r31
  514 0372 F0E0      		ldi r31,lo8(0x0)
  515 0374 6F2E      		mov r6,r31
@@ -535,14 +535,14 @@
  545 03b0 0E94 0000 		call map_values
  546 03b4 1B01      		movw r2,r22
  547 03b6 2C01      		movw r4,r24
- 548 03b8 6093 0000 		sts outer_result.1748,r22
- 549 03bc 7093 0000 		sts (outer_result.1748)+1,r23
- 550 03c0 8093 0000 		sts (outer_result.1748)+2,r24
- 551 03c4 9093 0000 		sts (outer_result.1748)+3,r25
- 552 03c8 6091 0000 		lds r22,outer_result.1748+4
- 553 03cc 7091 0000 		lds r23,(outer_result.1748+4)+1
- 554 03d0 8091 0000 		lds r24,(outer_result.1748+4)+2
- 555 03d4 9091 0000 		lds r25,(outer_result.1748+4)+3
+ 548 03b8 6093 0000 		sts outer_result.1736,r22
+ 549 03bc 7093 0000 		sts (outer_result.1736)+1,r23
+ 550 03c0 8093 0000 		sts (outer_result.1736)+2,r24
+ 551 03c4 9093 0000 		sts (outer_result.1736)+3,r25
+ 552 03c8 6091 0000 		lds r22,outer_result.1736+4
+ 553 03cc 7091 0000 		lds r23,(outer_result.1736+4)+1
+ 554 03d0 8091 0000 		lds r24,(outer_result.1736+4)+2
+ 555 03d4 9091 0000 		lds r25,(outer_result.1736+4)+3
  556 03d8 EDB7      		in r30,__SP_L__
  557 03da FEB7      		in r31,__SP_H__
  558 03dc 6182      		std Z+1,r6
@@ -556,10 +556,10 @@
  566 03ee 0F90      		pop __tmp_reg__
  567 03f0 0F90      		pop __tmp_reg__
  568 03f2 0F90      		pop __tmp_reg__
- 569 03f4 6093 0000 		sts outer_result.1748+4,r22
- 570 03f8 7093 0000 		sts (outer_result.1748+4)+1,r23
- 571 03fc 8093 0000 		sts (outer_result.1748+4)+2,r24
- 572 0400 9093 0000 		sts (outer_result.1748+4)+3,r25
+ 569 03f4 6093 0000 		sts outer_result.1736+4,r22
+ 570 03f8 7093 0000 		sts (outer_result.1736+4)+1,r23
+ 571 03fc 8093 0000 		sts (outer_result.1736+4)+2,r24
+ 572 0400 9093 0000 		sts (outer_result.1736+4)+3,r25
  573               	.LBE10:
  574               	.LM22:
  575 0404 EDA1      		ldd r30,Y+37
@@ -759,40 +759,32 @@
  778 0091 34        		.byte	52
  779 0092 A7        		.byte	-89
  780 0093 BE        		.byte	-66
- 781               		.lcomm outer_result.1748,8
- 782               		.comm uint_global_prad_M1,2,1
- 783               		.comm uint_global_prad_M2,2,1
- 784               		.comm uint_global_prad_M3,2,1
- 785               		.comm uint_global_prad_M4,2,1
- 786               		.comm uart_echo,1,1
- 787               		.comm UART0_TxHead,1,1
- 788               		.comm UART0_TxTail,1,1
- 789               		.comm UART0_RxHead,1,1
- 790               		.comm UART0_RxTail,1,1
- 791               		.comm UART1_TxHead,1,1
- 792               		.comm UART1_TxTail,1,1
- 793               		.comm UART1_RxHead,1,1
- 794               		.comm UART1_RxTail,1,1
- 827               	.Letext0:
+ 781               		.lcomm outer_result.1736,8
+ 782               		.comm uart_echo,1,1
+ 783               		.comm UART0_TxHead,1,1
+ 784               		.comm UART0_TxTail,1,1
+ 785               		.comm UART0_RxHead,1,1
+ 786               		.comm UART0_RxTail,1,1
+ 787               		.comm UART1_TxHead,1,1
+ 788               		.comm UART1_TxTail,1,1
+ 789               		.comm UART1_RxHead,1,1
+ 790               		.comm UART1_RxTail,1,1
+ 823               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 network.c
-C:\Users\magku\AppData\Local\Temp/cctWPVYR.s:2      *ABS*:0000003f __SREG__
-C:\Users\magku\AppData\Local\Temp/cctWPVYR.s:3      *ABS*:0000003e __SP_H__
-C:\Users\magku\AppData\Local\Temp/cctWPVYR.s:4      *ABS*:0000003d __SP_L__
-C:\Users\magku\AppData\Local\Temp/cctWPVYR.s:5      *ABS*:00000034 __CCP__
-C:\Users\magku\AppData\Local\Temp/cctWPVYR.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\magku\AppData\Local\Temp/cctWPVYR.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\magku\AppData\Local\Temp/cctWPVYR.s:18     .text:00000000 map_values
-C:\Users\magku\AppData\Local\Temp/cctWPVYR.s:128    .text:000000be network
-C:\Users\magku\AppData\Local\Temp/cctWPVYR.s:704    .data:00000050 bias_hidden
-                             .bss:00000000 outer_result.1748
-C:\Users\magku\AppData\Local\Temp/cctWPVYR.s:728    .data:00000064 bias_out
-C:\Users\magku\AppData\Local\Temp/cctWPVYR.s:620    .data:00000000 weights_hidden
-C:\Users\magku\AppData\Local\Temp/cctWPVYR.s:740    .data:0000006c weights_out
-                            *COM*:00000002 uint_global_prad_M1
-                            *COM*:00000002 uint_global_prad_M2
-                            *COM*:00000002 uint_global_prad_M3
-                            *COM*:00000002 uint_global_prad_M4
+C:\Users\magku\AppData\Local\Temp/ccJB3D8g.s:2      *ABS*:0000003f __SREG__
+C:\Users\magku\AppData\Local\Temp/ccJB3D8g.s:3      *ABS*:0000003e __SP_H__
+C:\Users\magku\AppData\Local\Temp/ccJB3D8g.s:4      *ABS*:0000003d __SP_L__
+C:\Users\magku\AppData\Local\Temp/ccJB3D8g.s:5      *ABS*:00000034 __CCP__
+C:\Users\magku\AppData\Local\Temp/ccJB3D8g.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\magku\AppData\Local\Temp/ccJB3D8g.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\magku\AppData\Local\Temp/ccJB3D8g.s:18     .text:00000000 map_values
+C:\Users\magku\AppData\Local\Temp/ccJB3D8g.s:128    .text:000000be network
+C:\Users\magku\AppData\Local\Temp/ccJB3D8g.s:704    .data:00000050 bias_hidden
+                             .bss:00000000 outer_result.1736
+C:\Users\magku\AppData\Local\Temp/ccJB3D8g.s:728    .data:00000064 bias_out
+C:\Users\magku\AppData\Local\Temp/ccJB3D8g.s:620    .data:00000000 weights_hidden
+C:\Users\magku\AppData\Local\Temp/ccJB3D8g.s:740    .data:0000006c weights_out
                             *COM*:00000001 uart_echo
                             *COM*:00000001 UART0_TxHead
                             *COM*:00000001 UART0_TxTail
