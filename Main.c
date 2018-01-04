@@ -55,7 +55,6 @@ Opis:
 int main(void)
 {
     unsigned char rcv;
-    char tmp[8];
 	double output[2];
 	uint32_t ultrasonics[2];
 	float ultrasonics_normalized[2];
@@ -66,13 +65,8 @@ int main(void)
 	UART0_init();					  
     TIMER_init();
     MOTOR_init();
-    //ADC_init();
 	init_sonar();
     sei();	//globalne wlaczenie przerwan
-	
-	//uint32_t distance = 0;
-    
-	//ADC_start_conversion();
 	
 	UART0_print("UART0 test\r\n");
 	LED2_OFF;
