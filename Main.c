@@ -38,8 +38,8 @@ void ioinit(void)
 	
 	LED1_DDR |= (1<<LED1)|(1<<LED2); //jako wyjscia
 	
-	PIR2_DDR &= ~(1<<PIR2);
-	PIR1_DDR &= ~(1<<PIR1);
+	PIR_R_DDR &= ~(1<<PIR_R);
+	PIR_L_DDR &= ~(1<<PIR_L);
 	
 	DDRF = 0x00; //caly port jako wejscie (konieczne gdy uzywamy ADC)
 }
@@ -93,15 +93,15 @@ int main(void)
 					read_sonar(ultrasonics);
 					pir_l = 0;
 					pir_r = 0;
-					//char out[10];
-					//char out1[10];
+					char out[10];
+					char out1[10];
 									
-					if((PINB & (1<<PIR2)))            // check for sensor pin PC.0 using bit
+					if((PIR_L_PIN & (1<<PIR_L)))            // check for sensor pin PC.0 using bit
 					{
 						pir_l = 1;
 					}
 									
-					if((PINB & (1<<PIR1)))            // check for sensor pin PC.0 using bit
+					if((PIR_R_PIN & (1<<PIR_R)))            // check for sensor pin PC.0 using bit
 					{
 						pir_r = 1;
 					}
@@ -120,12 +120,12 @@ int main(void)
 					output[0] = 0;
 					output[1] = 0;
 					network(output, ultrasonics_normalized[1], ultrasonics_normalized[0], pir_l, pir_r);
-					//dtostrf(output[0], 10, 5, out);
-					//dtostrf(output[1], 10, 5, out1);
-					//UART0_print(out);
-					//UART0_print("\r\n");
-					//UART0_print(out1);
-					//UART0_print("\r\n");
+					dtostrf(output[0], 10, 5, out);
+					dtostrf(output[1], 10, 5, out1);
+					UART0_print(out);
+					UART0_print("\r\n");
+					UART0_print(out1);
+					UART0_print("\r\n");
 					int left = (int)(output[0]*255);
 					int right = (int)(output[1]*255);
 					if ((left<50) & (right < 50)){

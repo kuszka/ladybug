@@ -7,10 +7,10 @@
  * Returns: none
 *********** ...- . . .-. --- -... --- - *********************************/
 void init_sonar(void){
-    TRIG_DDR |= (1<<TRIG_BIT);     // Set Trigger pin as output
-    ECHO_DDR &= ~(1<<ECHO_BIT);     // Set Echo pin as input
-	TRIGL_DDR |= (1<<TRIGL_BIT);     // Set Trigger pin as output
-    ECHOL_DDR &= ~(1<<ECHOL_BIT);     // Set Echo pin as input
+    TRIG_L_DDR |= (1<<TRIG_L_BIT);     // Set Trigger pin as output
+    ECHO_L_DDR &= ~(1<<ECHO_L_BIT);     // Set Echo pin as input
+	TRIG_R_DDR |= (1<<TRIG_R_BIT);     // Set Trigger pin as output
+    ECHO_R_DDR &= ~(1<<ECHO_R_BIT);     // Set Echo pin as input
 }
  
 /********** ...- . . .-. --- -... --- - *********************************
@@ -23,19 +23,19 @@ void init_sonar(void){
 ********** ...- . . .-. --- -... --- - *********************************/
 void trigger_sonar_left(void){
     // Clear pin before setting it high
-	TRIGL_PORT &= ~(1<<TRIGL_BIT);
+	TRIG_L_PORT &= ~(1<<TRIG_L_BIT);
     _delay_us(1);           // Clear to zero and give time for electronics to set
-  	TRIGL_PORT |=(1<<TRIGL_BIT);// Set pin high
+  	TRIG_L_PORT |=(1<<TRIG_L_BIT);// Set pin high
     _delay_us(12);          // Send high pulse for minimum 10us  
-	TRIGL_PORT &= ~(1<<TRIGL_BIT); // Clear pin
+	TRIG_L_PORT &= ~(1<<TRIG_L_BIT); // Clear pin
     _delay_us(1);           // Delay not required, but just in case...
 }
 void trigger_sonar_right(void){
-    TRIG_PORT &= ~(1<<TRIG_BIT);             // Clear pin before setting it high
+    TRIG_R_PORT &= ~(1<<TRIG_R_BIT);             // Clear pin before setting it high
     _delay_us(1);           // Clear to zero and give time for electronics to set
-    TRIG_PORT |=(1<<TRIG_BIT);  // Set pin high
+    TRIG_R_PORT |=(1<<TRIG_R_BIT);  // Set pin high
     _delay_us(12);          // Send high pulse for minimum 10us
-    TRIG_PORT &= ~(1<<TRIG_BIT);  // Clear pin
+    TRIG_R_PORT &= ~(1<<TRIG_R_BIT);  // Clear pin
     _delay_us(1);           // Delay not required, but just in case...
 }
  
@@ -60,7 +60,7 @@ void read_sonar(uint32_t ultrasonics[]){
 	i=0;
 	for(i=0;i<600000;i++)
 	{
-		if(!(ECHO_PIN & (1<<ECHO_BIT))) 
+		if(!(ECHO_R_PIN & (1<<ECHO_R_BIT))) 
 			continue;	//Line is still low, so wait
 		else 
 			break;		//High edge detected, so break.
@@ -77,9 +77,9 @@ void read_sonar(uint32_t ultrasonics[]){
 	TCNT1=0x00;			//Init counter
 
 	//Now wait for the falling edge
-	for(i=0;i<600000;i++)
+	for(i=0;i<60000;i++)
 	{
-		if((ECHO_PIN & (1<<ECHO_BIT)))
+		if((ECHO_R_PIN & (1<<ECHO_R_BIT)))
 		{
 			if(TCNT1 > 60000) break; else continue;
 		}
@@ -87,7 +87,7 @@ void read_sonar(uint32_t ultrasonics[]){
 			break;
 	}
 
-	if(i==600000)
+	if(i==60000)
 		ultrasonics[0] = 1;	//Indicates time out
 
 	//Falling edge found
@@ -100,7 +100,7 @@ void read_sonar(uint32_t ultrasonics[]){
 	if(result_right > 60000)
 		ultrasonics[0] = 2;	//No obstacle
 	else
-		ultrasonics[0] = i/58;
+		ultrasonics[0] = result_right/58;
 		
 
 	// LEFT
@@ -109,7 +109,7 @@ void read_sonar(uint32_t ultrasonics[]){
 	
 	for(i=0;i<600000;i++)
 	{
-		if(!(ECHOL_PIN & (1<<ECHOL_BIT))) 
+		if(!(ECHO_L_PIN & (1<<ECHO_L_BIT))) 
 			continue;	//Line is still low, so wait
 		else 
 			break;		//High edge detected, so break.
@@ -126,17 +126,17 @@ void read_sonar(uint32_t ultrasonics[]){
 	TCNT1=0x00;			//Init counter
 
 	//Now wait for the falling edge
-	for(i=0;i<600000;i++)
+	for(i=0;i<60000;i++)
 	{
-		if((ECHOL_PIN & (1<<ECHOL_BIT)))
+		if((ECHO_L_PIN & (1<<ECHO_L_BIT)))
 		{
-			if(TCNT1 > 600000) break; else continue;
+			if(TCNT1 > 60000) break; else continue;
 		}
 		else
 			break;
 	}
 
-	if(i==600000)
+	if(i==60000)
 		ultrasonics[1] = 1;	//Indicates time out
 
 	//Falling edge found
@@ -149,5 +149,5 @@ void read_sonar(uint32_t ultrasonics[]){
 	if(result_left > 60000)
 		ultrasonics[1] = 2;	//No obstacle
 	else
-		ultrasonics[1] = i/58;
+		ultrasonics[1] = result_left/58;
 }

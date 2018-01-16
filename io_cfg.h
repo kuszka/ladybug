@@ -1,13 +1,6 @@
-/*******************************************************************************
-			Konfiguracja plytki MOBOT-EXP MB oraz MOBOT-EXP MCB
-********************************************************************************
-ver. 1.0
-Pawel Piatek
-p.piatek@wobit.com.pl
-WObit 2008
-*******************************************************************************/
+/*************PINOUT************************/
 
-// sterowanie silnikami od kol napedowych
+// motor 1
 #define M1_IN1          PA3
 #define M1_IN2          PA4
 #define M1_P            PE4
@@ -15,6 +8,7 @@ WObit 2008
 #define M1_PORT         PORTA
 #define M1_DDR          DDRA
 
+//motor 2
 #define M2_IN1          PA5
 #define M2_IN2          PA6
 #define M2_P            PE3
@@ -22,35 +16,41 @@ WObit 2008
 #define M2_PORT         PORTA
 #define M2_DDR          DDRA
 
-#define PIR1          	PB0
-#define PIR1_PORT       PORTB
-#define PIR1_DDR        DDRB
+// Right PIR sensor
+#define PIR_R          	PB0
+#define PIR_R_PORT      PORTB
+#define PIR_R_DDR       DDRB
+#define PIR_R_PIN    	PINB
 
-#define PIR2	        PB1
-#define PIR2_PORT       PORTB
-#define PIR2_DDR        DDRB
+// Left PIR sensor
+#define PIR_L	        PC3
+#define PIR_L_PORT      PORTC
+#define PIR_L_DDR       DDRC
+#define PIR_L_PIN    	PINC
 
-#define TRIG_DDR    	DDRB            // Trigger Port
-#define TRIG_PORT   	PORTB
-#define TRIG_PIN    	PINB
-#define TRIG_BIT    	PB3             // Trigger Pin
+// Left ultrasonic sensor
+#define TRIG_L_DDR    	DDRB            
+#define TRIG_L_PORT   	PORTB
+#define TRIG_L_PIN    	PINB
+#define TRIG_L_BIT    	PB2             
  
-#define ECHO_DDR    	DDRB            // Echo Port
-#define ECHO_PORT   	PORTB
-#define ECHO_PIN    	PINB
-#define ECHO_BIT    	PB4             // Echo Pin
+#define ECHO_L_DDR    	DDRB          
+#define ECHO_L_PORT   	PORTB
+#define ECHO_L_PIN    	PINB
+#define ECHO_L_BIT    	PB3 
 
-#define TRIGL_DDR    	DDRC           // Trigger Port
-#define TRIGL_PORT   	PORTC
-#define TRIGL_PIN    	PINC
-#define TRIGL_BIT    	PC5             // Trigger Pin
+// Right ultrasonic sensor
+#define TRIG_R_DDR    	DDRA 
+#define TRIG_R_PORT   	PORTA
+#define TRIG_R_PIN    	PINA
+#define TRIG_R_BIT    	PA2 
  
-#define ECHOL_DDR    	DDRC            // Echo Port
-#define ECHOL_PORT   	PORTC
-#define ECHOL_PIN    	PINC
-#define ECHOL_BIT    	PC6             // Echo Pin
+#define ECHO_R_DDR    	DDRA  
+#define ECHO_R_PORT   	PORTA
+#define ECHO_R_PIN    	PINA
+#define ECHO_R_BIT    	PA7   
 
-
+//Sleep the motors
 #define FS_AB           PC2
 #define FS_AB_DDR       DDRC
 #define FS_AB_PORT      PORTC
@@ -59,9 +59,8 @@ WObit 2008
 #define PG3_SLEEP           PG3
 #define PG3_SLEEP_PORT      PORTG
 #define PG3_SLEEP_DDR       DDRG
-//sygnal PG3_SLEEP jest wspolny z driverem silnika krokowego
 
-// diody
+// diode
 #define LED1			PD7
 #define LED1_PORT     	PORTD
 #define LED1_DDR     	DDRD
