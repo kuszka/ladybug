@@ -100,7 +100,7 @@ void read_sonar(uint32_t ultrasonics[]){
 	if(result_right > 60000)
 		ultrasonics[0] = 2;	//No obstacle
 	else
-		ultrasonics[0] = result_right/58;
+		ultrasonics[0] = result_right/116;
 		
 
 	// LEFT
@@ -149,5 +149,5 @@ void read_sonar(uint32_t ultrasonics[]){
 	if(result_left > 60000)
 		ultrasonics[1] = 2;	//No obstacle
 	else
-		ultrasonics[1] = result_left/58;
+		ultrasonics[1] = result_left/116;
 }

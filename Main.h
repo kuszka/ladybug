@@ -29,6 +29,9 @@ oraz definicje mart sluzacych do zapalania, gaszenia oraz przelaczania diod LED
 #include "Uart.h"
 #include "network.h"
 
+void setState(void);
+void calculateOutput(void);
+void sonarPrint(void);
 
 // diody
 #define LED1_OFF        LED1_PORT|=(1<<LED1)
@@ -38,6 +41,8 @@ oraz definicje mart sluzacych do zapalania, gaszenia oraz przelaczania diod LED
 #define LED2_OFF         LED2_PORT|=(1<<LED2)
 #define LED2_ON        LED2_PORT&=~(1<<LED2)
 #define LED2_TOGGLE     LED2_PORT^=(1<<LED2)
+
+#define ITERATE		50
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
