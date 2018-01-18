@@ -71,23 +71,24 @@ int main(void)
 	UART0_print("UART0 test\r\n");
 	LED2_OFF;
 	int state =2;
-	int i;
+	int i=0;
 	
 	for(;;) //glowna petla programu
 	{	
 		switch(state){
 			case 1:
-				i = 0;
-				while(i<10){
+				if(i<10){
 					if(UART0_data_in_rx_buffer()){
-						i=0;
 						switch(rcv = UART0_receive_byte()){	
 							case 'b':
-								MOTOR_break();						
-							break;					
+								MOTOR_break();
+								state = 2;
+							break;
+							case '*':
+								i = 0;
+							break;
 						}
 					}
-			
 					ultrasonics[0] = 0;
 					ultrasonics[1] = 0;
 					read_sonar(ultrasonics);
@@ -131,19 +132,29 @@ int main(void)
 					if ((left<50) & (right < 50)){
 						MOTOR_sleep();
 					}
-					else{
+					else if(left>100 & right>100){
 						MOTOR_drive(right,left);
+					}
+					else if(right>100){
+						MOTOR_drive(right,100);
+					}
+					else if(left>100){
+						MOTOR_drive(100,left);
 					}
 					i++;
 				}
-				MOTOR_break();
-				state = 2;
+				else{
+					MOTOR_break();
+				``	state = 2;
+					i=0;
+				}
 				break;
 			case 2:
 				if(UART0_data_in_rx_buffer()){
 					switch(rcv = UART0_receive_byte()){	
 						case 'a':
-							state = 1;						
+							state = 1;	
+							i=0;
 						break;					
 					}
 				}
