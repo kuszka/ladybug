@@ -1,21 +1,3 @@
-/*******************************************************************************
-  Glowna funkcja przykladowego programu do plytki MOBOT-EXP MB w raz z modulem 
-						rozszerzen MOBOT-EXP MCB
-********************************************************************************
-ver. 1.0
-Pawel Piatek
-p.piatek@wobit.com.pl
-WObit 2008
-
-Opis:
-	Plik zawiera glowna funkcje programu oraz funkcje inicjalizujaca 
-wyprowadzenia mikrokontrolera. W funkcji glownej wywolywane sa najpierw funkcje
-inicjalizujace poszczegolne uzyte uklady peryferyjne mikrokontrolera, nastepnie
-w glownej petli oczekuje na odbior polecen przez UART odpowiednio na nie reagujac.
-Program mo¿na testowaæ za pomoc¹ dowolnego terminala.
-Ustawienia portu COM:
-57600 8N1
-*******************************************************************************/
 #include "Main.h"
 
 unsigned char rcv;
@@ -27,14 +9,7 @@ int pir_r;
 int state =2;
 int i=0;
 
-/*******************************************************************************
-Funkcja:
-	void ioinit(void)
-Argumenty: 
-	- brak
-Opis:
-	Wstepna Inicjalizacja wejsc/wyjsc
-*******************************************************************************/
+
 void ioinit(void)
 {
 	M1_DDR |= (1<<M1_IN1)|(1<<M1_IN2)|(1<<M2_IN1)|(1<<M2_IN2); //jako wyjscia
@@ -48,6 +23,7 @@ void ioinit(void)
 	
 	PIR_R_DDR &= ~(1<<PIR_R);
 	PIR_L_DDR &= ~(1<<PIR_L);
+	BLT_STATE_DDR &= ~(1<<BLT_STATE);
 	
 	DDRF = 0x00; //caly port jako wejscie (konieczne gdy uzywamy ADC)
 }
@@ -107,6 +83,7 @@ void calculateOutput(void){
 	UART0_print("\r\n");
 	UART0_print(out1);
 	UART0_print("\r\n");*/
+	sonarPrint();
 	int left = (int)(output[0]*255);
 	int right = (int)(output[1]*255);
 	if ((left < 80) && (right < 80)){
@@ -130,32 +107,22 @@ void setState(void){
 				MOTOR_break();
 				state = 2;
 			break;
-			case '*':
-				if(state == 1){
-					i = 0;
-				}
-			break;
 			case 'a':
 				if(state == 2){
 					state = 1;	
-					i=0;
 				}
 			break;	
 		}
 	}
-	if(i>ITERATE){
-		MOTOR_break();
-		state =2;
+	
+	if(state == 1){
+		if(!(BLT_STATE_PIN & (1<<BLT_STATE))){
+			MOTOR_break();
+			state = 2;
+		}
 	}
 }
-/*******************************************************************************
-Funkcja:
-	int main(void)
-Argumenty: 
-	- brak
-Opis:
-	Glowna funkcja programu
-*******************************************************************************/
+
 int main(void)
 {
 	    
@@ -177,7 +144,6 @@ int main(void)
 			break;
 			case 1:
 				calculateOutput();
-				i++;
 			break;
 			default:
 				UART0_print("error");

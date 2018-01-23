@@ -16,6 +16,12 @@
 #define M2_PORT         PORTA
 #define M2_DDR          DDRA
 
+// Bluetooth State Pin
+#define BLT_STATE       	PD0
+#define BLT_STATE_PORT      PORTD
+#define BLT_STATE_DDR       DDRD
+#define BLT_STATE_PIN    	PIND
+
 // Right PIR sensor
 #define PIR_R          	PB0
 #define PIR_R_PORT      PORTB
@@ -29,26 +35,26 @@
 #define PIR_L_PIN    	PINC
 
 // Left ultrasonic sensor
-#define TRIG_L_DDR    	DDRB            
-#define TRIG_L_PORT   	PORTB
-#define TRIG_L_PIN    	PINB
-#define TRIG_L_BIT    	PB2             
+#define TRIG_L_DDR    	DDRA            
+#define TRIG_L_PORT   	PORTA
+#define TRIG_L_PIN    	PINA
+#define TRIG_L_BIT    	PA2             
  
-#define ECHO_L_DDR    	DDRB          
-#define ECHO_L_PORT   	PORTB
-#define ECHO_L_PIN    	PINB
-#define ECHO_L_BIT    	PB3 
+#define ECHO_L_DDR    	DDRA          
+#define ECHO_L_PORT   	PORTA
+#define ECHO_L_PIN    	PINA
+#define ECHO_L_BIT    	PA7 
 
 // Right ultrasonic sensor
-#define TRIG_R_DDR    	DDRA 
-#define TRIG_R_PORT   	PORTA
-#define TRIG_R_PIN    	PINA
-#define TRIG_R_BIT    	PA2 
+#define TRIG_R_DDR    	DDRB 
+#define TRIG_R_PORT   	PORTB
+#define TRIG_R_PIN    	PINB
+#define TRIG_R_BIT    	PB2 
  
-#define ECHO_R_DDR    	DDRA  
-#define ECHO_R_PORT   	PORTA
-#define ECHO_R_PIN    	PINA
-#define ECHO_R_BIT    	PA7   
+#define ECHO_R_DDR    	DDRB  
+#define ECHO_R_PORT   	PORTB
+#define ECHO_R_PIN    	PINB
+#define ECHO_R_BIT    	PB3   
 
 //Sleep the motors
 #define FS_AB           PC2
