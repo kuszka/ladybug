@@ -28,6 +28,7 @@ oraz definicje mart sluzacych do zapalania, gaszenia oraz przelaczania diod LED
 #include "sonar.h"
 #include "Uart.h"
 #include "network.h"
+#include "filter.h"
 
 void setState(void);
 void calculateOutput(void);

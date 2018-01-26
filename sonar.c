@@ -13,14 +13,6 @@ void init_sonar(void){
     ECHO_R_DDR &= ~(1<<ECHO_R_BIT);     // Set Echo pin as input
 }
  
-/********** ...- . . .-. --- -... --- - *********************************
- * Send 10us pulse on Sonar Trigger pin
- * 1.   Clear trigger pin before sending a pulse
- * 2.   Send high pulse to trigger pin for 10us
- * 3.   Clear trigger pin to pull it trigger pin low
- *  Input:   none
- *  Returns: none
-********** ...- . . .-. --- -... --- - *********************************/
 void trigger_sonar_left(void){
     // Clear pin before setting it high
 	TRIG_L_PORT &= ~(1<<TRIG_L_BIT);
@@ -30,6 +22,7 @@ void trigger_sonar_left(void){
 	TRIG_L_PORT &= ~(1<<TRIG_L_BIT); // Clear pin
     _delay_us(1);           // Delay not required, but just in case...
 }
+
 void trigger_sonar_right(void){
     TRIG_R_PORT &= ~(1<<TRIG_R_BIT);             // Clear pin before setting it high
     _delay_us(1);           // Clear to zero and give time for electronics to set
@@ -38,20 +31,7 @@ void trigger_sonar_right(void){
     TRIG_R_PORT &= ~(1<<TRIG_R_BIT);  // Clear pin
     _delay_us(1);           // Delay not required, but just in case...
 }
- 
-/********** ...- . . .-. --- -... --- - *********************************
- * Increment timer on each overflow
- * Input:   none
- * Returns: none
-********** ...- . . .-. --- -... --- - *********************************/
- 
-/********** ...- . . .-. --- -... --- - *********************************
- * Calculate and store echo time and return distance
- * Input:   none
- * Returns: 1. -1       :   Indicates trigger error. Could not pull trigger high
- *          2. -2       :   Indicates echo error. No echo received within range
- *          3. Distance :   Sonar calculated distance in cm.
-********** ...- . . .-. --- -... --- - *********************************/
+
 void read_sonar(uint32_t ultrasonics[]){
 
 	uint32_t i, result_left, result_right;
@@ -65,9 +45,6 @@ void read_sonar(uint32_t ultrasonics[]){
 		else 
 			break;		//High edge detected, so break.
 	}
-
-	if(i==600000)
-		ultrasonics[0] = 0;	//Indicates time out
 	
 	//High Edge Found
 
@@ -87,9 +64,6 @@ void read_sonar(uint32_t ultrasonics[]){
 			break;
 	}
 
-	if(i==60000)
-		ultrasonics[0] = 1;	//Indicates time out
-
 	//Falling edge found
 
 	result_right=TCNT1;
@@ -98,7 +72,7 @@ void read_sonar(uint32_t ultrasonics[]){
 	TCCR1B=0x00;
 
 	if(result_right > 60000)
-		ultrasonics[0] = 2;	//No obstacle
+		ultrasonics[0] = 151;	//No obstacle
 	else
 		ultrasonics[0] = result_right/116;
 		
@@ -114,9 +88,6 @@ void read_sonar(uint32_t ultrasonics[]){
 		else 
 			break;		//High edge detected, so break.
 	}
-
-	if(i==600000)
-		ultrasonics[1] = 0;	//Indicates time out
 	
 	//High Edge Found
 
@@ -136,9 +107,6 @@ void read_sonar(uint32_t ultrasonics[]){
 			break;
 	}
 
-	if(i==60000)
-		ultrasonics[1] = 1;	//Indicates time out
-
 	//Falling edge found
 
 	result_left=TCNT1;
@@ -147,7 +115,7 @@ void read_sonar(uint32_t ultrasonics[]){
 	TCCR1B=0x00;
 
 	if(result_left > 60000)
-		ultrasonics[1] = 2;	//No obstacle
+		ultrasonics[1] = 151;	//No obstacle
 	else
 		ultrasonics[1] = result_left/116;
 }

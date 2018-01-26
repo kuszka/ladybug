@@ -32,8 +32,8 @@ void ioinit(void)
 void sonarPrint(void){
 	ultrasonics[0] = 0;
 	ultrasonics[1] = 0;
-	UART0_print("Ultrasonic: ");
- 	read_sonar(ultrasonics);
+	UART0_print("Ultrasonic filtered: ");
+ 	median_filter(ultrasonics);
  	char str[16];
 	char str2[16];
 	itoa (ultrasonics[0],str,10);
@@ -47,7 +47,7 @@ void sonarPrint(void){
 void calculateOutput(void){
 	ultrasonics[0] = 0;
 	ultrasonics[1] = 0;
-	read_sonar(ultrasonics);
+	median_filter(ultrasonics);
 	pir_l = 0;
 	pir_r = 0;
 	char out[10];
@@ -63,40 +63,40 @@ void calculateOutput(void){
 		UART0_print("RIGHT \r\n");
 		pir_r = 1;
 	}
-	if(ultrasonics[0] > 100)            // check for sensor pin PC.0 using bit
+	if(ultrasonics[0] > 150)            // check for sensor pin PC.0 using bit
 	{
-		ultrasonics[0] = 100;
+		ultrasonics[0] = 150;
 	}
 	
-	if(ultrasonics[1] > 100)            // check for sensor pin PC.0 using bit
+	if(ultrasonics[1] > 150)            // check for sensor pin PC.0 using bit
 	{
-		ultrasonics[1] = 100;
+		ultrasonics[1] = 150;
 	}
-	ultrasonics_normalized[0]= ultrasonics[0]/100;
-	ultrasonics_normalized[1]= ultrasonics[1]/100;
+	ultrasonics_normalized[0]= ultrasonics[0]/150;
+	ultrasonics_normalized[1]= ultrasonics[1]/150;
 	output[0] = 0;
 	output[1] = 0;
 	network(output, ultrasonics_normalized[1], ultrasonics_normalized[0], pir_l, pir_r);
-	/*dtostrf(output[0], 10, 5, out);
+	dtostrf(output[0], 10, 5, out);
 	dtostrf(output[1], 10, 5, out1);
 	UART0_print(out);
 	UART0_print("\r\n");
 	UART0_print(out1);
-	UART0_print("\r\n");*/
-	sonarPrint();
+	UART0_print("\r\n");
+	//sonarPrint();
 	int left = (int)(output[0]*255);
 	int right = (int)(output[1]*255);
-	if ((left < 80) && (right < 80)){
+	if ((left < 100) && (right < 100)){
 		MOTOR_sleep();
 	}
-	else if((left>=80) && (right>=80)){
-		MOTOR_drive(200,200);
+	else if((left>=100) && (right>=100)){
+		MOTOR_drive(250,250);
 	}
-	else if(right>=80){
-		MOTOR_drive(80,200);
+	else if(right>=100){
+		MOTOR_drive(250,-200);
 	}
-	else if(left>=80){
-		MOTOR_drive(200,80);
+	else if(left>=100){
+		MOTOR_drive(-200,250);
 	}
 }
 
