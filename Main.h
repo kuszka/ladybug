@@ -1,16 +1,3 @@
-/*******************************************************************************
-							Pliki naglowkowe
-********************************************************************************
-ver. 1.0
-Pawel Piatek
-p.piatek@wobit.com.pl
-WObit 2008
-
-Opis:
-	Plik zawiera polecenie dolaczenia wszystkich uzywanych plikow naglowkowych
-oraz definicje mart sluzacych do zapalania, gaszenia oraz przelaczania diod LED
-*******************************************************************************/
-
 #ifndef _MAIN_H_
 #define _MAIN_H_
 
@@ -45,6 +32,4 @@ void sonarPrint(void);
 
 #define ITERATE		50
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////
 #endif//_MAIN_H_

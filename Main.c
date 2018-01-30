@@ -12,20 +12,20 @@ int i=0;
 
 void ioinit(void)
 {
-	M1_DDR |= (1<<M1_IN1)|(1<<M1_IN2)|(1<<M2_IN1)|(1<<M2_IN2); //jako wyjscia
-	M1_P_DDR |= (1<<M1_P)|(1<<M2_P); //piny od PWMa jako wyjscia
+	M1_DDR |= (1<<M1_IN1)|(1<<M1_IN2)|(1<<M2_IN1)|(1<<M2_IN2);
+	M1_P_DDR |= (1<<M1_P)|(1<<M2_P);
 
-	PG3_SLEEP_DDR |= (1<<PG3_SLEEP); //jako wyjscie
-	PG3_SLEEP_PORT &= ~(1<<PG3_SLEEP); //uspienie silnikow	
-	FS_AB_DDR &= ~(1<<FS_AB);  //pinod FS jako wejscie	
+	PG3_SLEEP_DDR |= (1<<PG3_SLEEP); 
+	PG3_SLEEP_PORT &= ~(1<<PG3_SLEEP); 
+	FS_AB_DDR &= ~(1<<FS_AB);  
 	
-	LED1_DDR |= (1<<LED1)|(1<<LED2); //jako wyjscia
+	LED1_DDR |= (1<<LED1)|(1<<LED2);
 	
 	PIR_R_DDR &= ~(1<<PIR_R);
 	PIR_L_DDR &= ~(1<<PIR_L);
 	BLT_STATE_DDR &= ~(1<<BLT_STATE);
 	
-	DDRF = 0x00; //caly port jako wejscie (konieczne gdy uzywamy ADC)
+	DDRF = 0x00;
 }
 
 // IN CASE OF DEBUG
@@ -53,22 +53,22 @@ void calculateOutput(void){
 	char out[10];
 	char out1[10];
 
-	if((PIR_L_PIN & (1<<PIR_L)))            // check for sensor pin PC.0 using bit
+	if((PIR_L_PIN & (1<<PIR_L))) 
 	{
 		UART0_print("LEFT \r\n");
 		pir_l = 1;
 	}
-	if((PIR_R_PIN & (1<<PIR_R)))            // check for sensor pin PC.0 using bit
+	if((PIR_R_PIN & (1<<PIR_R))) 
 	{
 		UART0_print("RIGHT \r\n");
 		pir_r = 1;
 	}
-	if(ultrasonics[0] > 150)            // check for sensor pin PC.0 using bit
+	if(ultrasonics[0] > 150)
 	{
 		ultrasonics[0] = 150;
 	}
 	
-	if(ultrasonics[1] > 150)            // check for sensor pin PC.0 using bit
+	if(ultrasonics[1] > 150)
 	{
 		ultrasonics[1] = 150;
 	}
@@ -83,7 +83,7 @@ void calculateOutput(void){
 	UART0_print("\r\n");
 	UART0_print(out1);
 	UART0_print("\r\n");
-	//sonarPrint();
+	sonarPrint();
 	int left = (int)(output[0]*255);
 	int right = (int)(output[1]*255);
 	if ((left < 100) && (right < 100)){
@@ -136,7 +136,7 @@ int main(void)
 	UART0_print("UART0 test\r\n");
 	LED2_OFF;
 	
-	for(;;) //glowna petla programu
+	for(;;)
 	{
 		setState();
 		switch(state){
@@ -144,12 +144,14 @@ int main(void)
 			break;
 			case 1:
 				calculateOutput();
+				//sonarPrint();
 			break;
 			default:
 				UART0_print("error");
 				MOTOR_break();
 			break;
 		}
+		_delay_ms(50); 
     }
 	UART0_print("bye!");
 	return 0;
